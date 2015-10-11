@@ -1,0 +1,7 @@
+{
+  "name": "webir-crawler",
+  "main": "crawler.js",
+  "dependencies": {
+    "simplecrawler": "^0.5.3"
+    }
+}

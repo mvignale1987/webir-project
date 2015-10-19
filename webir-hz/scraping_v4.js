@@ -6,7 +6,7 @@ var request = require("request"),
     arrayUrls = new Array(),
     existe=false;
 
-    var diario= 'nytimes';
+    var diario= 'elpais';
 
     //Si es true porque estoy laburando local sin internet, sino accediendo directamente de internet.
     if(true)

@@ -1,0 +1,445 @@
+/* ColorBox */
+#cboxNext, #cboxPrevious, #cboxClose { background:url("/static/CLAClarinV3/images/controls-colorbox.png") no-repeat; border:0 }
+
+#colorbox, #cboxOverlay, #cboxWrapper{ position:absolute; top:0; left:0; z-index:9999; overflow:hidden; }
+#cboxContent{ position:relative; margin-top:20px; padding:25px 0 0 0; background:#000; }
+#cboxMiddleLeft, #cboxBottomLeft { clear: left; }
+
+#cboxLoadedContent iframe { display:block; width:100%; height:100%; border:0; }
+#cboxLoadingOverlay, #cboxLoadingGraphic {position:absolute; top:0; left:0; width:100%; }
+#cboxLoadingGraphic { background:url("/static/CLAClarinV3/images/loading.gif") center center no-repeat #000; }
+
+#cboxTitle { position:absolute; bottom:35px; left:0; color:#ccc; font-weight: bold; max-width: 660px; }
+#cboxTitle p, #cboxCurrent { background:url("/static/CLAClarinV3/images/bg-transparent-black_gygia.png") repeat; padding: 5px; }
+#cboxTitle .bajada { display:none; }
+#cboxCurrent {position:absolute; bottom:35px; right:0; color:#ccc; padding: 5px 8px; font-weight: bold; }
+
+#cboxNext { position:absolute; top:50%; right:0px; margin-top:-32px; background-position: top right; width:28px; height:65px; text-indent:-9999px; cursor:pointer; }
+#cboxNext.hover { background-position:bottom right; }
+#cboxPrevious { position:absolute; top:50%; left:0px; margin-top:-32px; background-position: top left; width:28px; height:65px; text-indent:-9999px; cursor:pointer; }
+#cboxPrevious.hover { background-position:bottom left; }
+#cboxClose { position:absolute; top:0; right:11px; display:block; background-position:top center; width:38px; height:24px; text-indent:-9999px; cursor:pointer; }
+#cboxClose.hover { background-position:bottom center; }
+
+#cboxSlideshow { position:absolute; top:-20px; right:90px; color:#fff; }
+#cboxOverlay { position:fixed; width:100%; height:100%; background:#000;}
+
+
+.modalPase #cboxContent{
+    padding: 60px 20px 20px;
+    margin: 0; 
+}
+
+
+
+.modalPase #cboxClose{
+    background:url("/static/CLAClarinV3/images/closeBox.png") no-repeat;
+    width: 20px;
+    height: 20px;
+    margin: 20px 10px;
+}
+
+/* login */
+.pase-subnav{
+    width: 350px;
+    font-weight: normal;
+    color: #3B3B3B;
+    overflow: hidden;
+}
+.pase-subnav .hd .ban{
+	float: right;
+}
+.pase-subnav .hd{
+    height: 35px;
+    background: #F2EEE5;
+    padding: 18px 20px;
+}
+.pase-subnav p,.pase-subnav span{
+    font-size: 12px;
+    font-weight: bold;
+}
+.pase-subnav .bd, .pase-subnav .redes,.pase-subnav .recuperar{
+    padding: 18px 20px;
+    background: #FFF;
+}
+.pase-subnav .redes{
+	border-bottom: solid 1px #cfccc2;
+}
+.pase-subnav .redes .masRedes{
+    text-align: center;
+    cursor: pointer;
+}
+.pase-subnav .redes ul{
+    overflow: hidden;
+    width: 294px;
+    margin: 13px auto 12px;
+}
+.pase-subnav .redes ul.small{
+    width: 166px;
+    display: none;
+}
+.pase-subnav .redes ul img{
+    cursor: pointer;
+}
+.pase-subnav .redes ul.small li{
+    padding-right: 8px;
+    padding-left: 8px; 
+}
+.pase-subnav .redes li{
+    background: url('/static/CLAClarinV3/images/paseRedesBorder.png') no-repeat;
+    background-position: right center;
+    float: left;
+    padding-right: 12px;
+    padding-left: 12px;    
+}
+.pase-subnav .redes li.last{
+    background: none;
+}
+.pase-subnav a.aRight, .pase-subnav .cerrar-terminos{
+	float: right;
+	font-size: 12px;
+	color: #989898;
+	border-bottom: 1px dotted;
+    cursor: pointer;
+}
+.pase-subnav a:hover,.pase-subnav .cerrar-terminos:hover{
+    color: #333;
+}
+.pase-subnav .olvido{
+    overflow: hidden;
+}
+
+.pase-subnav input,.pase-subnav select{
+    background-color: #EAEAEA;
+    border: none;
+    width: 290px;
+    border-radius: 0;
+    padding: 10px;
+    font-size: 16px;
+    margin: 7px 0;
+}
+
+.pase-subnav select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+
+.pase-subnav input.error,.pase-subnav select.error{
+    background-color: #c37a7a;
+}
+.pase-subnav input:focus,.pase-subnav select:focus {
+    background-color: #d5d5d5;
+}
+.pase-subnav input[type="submit"]:focus{
+    background-color: transparent;
+}
+
+.pase-subnav input.error::-webkit-input-placeholder{
+    color: #FFF;
+}
+.pase-subnav input.error:-moz-placeholder{
+    color: #FFF;
+}
+.pase-subnav input.error::-moz-placeholder{
+    color: #FFF;
+}
+.pase-subnav input.error:-ms-input-placeholder{
+    color: #FFF;
+}
+.pase-subnav select.error{
+    color: #FFF;
+}
+.pase-subnav input::-webkit-input-placeholder{
+    font-size: 16px;
+    color: #555;
+}
+.pase-subnav input:-moz-placeholder{
+    font-size: 16px;
+    color: #555;
+}
+.pase-subnav input::-moz-placeholder{
+    font-size: 16px;
+    color: #555;
+}
+.pase-subnav input:-ms-input-placeholder{
+    font-size: 16px;
+    color: #555;
+}
+.pase-subnav select{
+    font-size: 14px;
+    color: #555;
+}
+
+.pase-subnav select{
+    width: auto;
+    line-height: 16px;
+    height: 40px;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    background-image: url("/static/CLAClarinV3/images/paseSelect.png");
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+.pase-subnav input[type="submit"],.pase-subnav .aceptBtn{
+    background-position: -571px 0;
+    width: 73px;
+    height: 73px;
+    color: #FFF;
+    text-align: center;
+    float: right;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 14px 0 0;
+}
+.pase-subnav label{
+    font-size: 12px;
+    color: #CB1212;
+    display: block;
+}
+.pase-subnav .tit-cont{
+    overflow: hidden;
+    float: left;
+    margin-top: 4px;
+}
+.pase-subnav .logo-subnav{
+    width: 28px;
+    height: 27px;
+    margin-top: 1px;
+    float: left;
+    background-position: -296px -80px;
+}
+.pase-subnav .tit-cont .tit{
+    height: 27px;
+    width: 70px;
+    margin-left: 6px;
+    padding-left: 6px;
+    border-left: dotted 1px #434242;
+    float: left;
+    clear: none;
+}
+.pase-subnav .tit-cont .tit h3{
+    font-weight: bold;
+    font-size: 14px;
+    color: #434242;
+    line-height: 14px;
+    text-transform: uppercase;
+    padding: 0; 
+}
+
+/* olvido su contraseña */
+.pase-subnav .captcha-pase img{
+    border: solid 1px #dcdcdc;
+    margin: 8px 0;
+}
+.pase-subnav .err{
+    margin-top: 10px;
+}
+
+/* gracias */
+.pase-subnav .gracias p,#popupInfo p{
+    color: #FFF;
+    font-size: 18px;
+    text-align: center;
+}
+#popupInfo p{
+    margin: 10px 28px;
+}
+.pase-subnav .contGracias,#popupInfo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 178px;
+    background: rgba(0,0,0,.9);
+}
+.pase-subnav #popupInfo h3{
+    color: #CB1212;
+    font-weight: 900;
+    font-size: 24px;
+    text-align: center;
+}
+.pase-subnav .aceptBtn,#popupInfo .aceptBtn{
+    line-height: 73px;
+    float: none;
+    margin: 20px auto;
+}
+/* registro por red social */
+#panel-restorePasswordSocial{
+    display: none;
+}
+#registroPorRedSocial{
+    background: #FFF;
+}
+.pase-subnav ul.tabsPase{
+    overflow: hidden;
+    background: #FFF;
+    padding-top: 3px;
+}
+.pase-subnav ul.tabsPase li{
+    float: left;
+    width: 50%;
+}
+.pase-subnav ul.tabsPase li a{
+    font-size: 12px;
+    color: #434242;
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    background: #F0F0F0;
+    text-align: center;
+}
+.pase-subnav ul.tabsPase li a.active{
+    background: transparent;
+}
+.pase-subnav ul.tabsPase li a.active.default{
+    cursor: default;
+}
+.pase-subnav #cboxLoadedContent{
+    width: 530px;
+}
+
+.pase-subnav .select-sexo{
+    width: 142px;
+}
+.pase-subnav .select-dia{
+    width: 77px;
+    margin-right: 5px;
+}
+.pase-subnav .select-mes{
+    width: 130px;
+    margin-right: 4px;
+}
+.pase-subnav .select-ano{
+    width: 85px;
+}
+.pase-subnav input.fieldCheck{
+    float: left;
+    width: 14px;
+    margin: 2px 0;
+    padding: 0;
+}
+.pase-subnav .fieldTxt{
+    float: left;
+    width: 280px;
+    margin-left: 10px;
+    line-height: 17px;
+}
+.field label{
+    color: #9A9A9A;
+}
+.pase-subnav .field.check{
+    overflow: hidden;
+    margin: 10px 0;
+}
+.pase-subnav span.select-fecha{
+    margin-top: 14px;
+    padding-left: 10px;
+    display: block;
+    color: #9a9a9a;
+}
+
+#panel-restorePasswordSocial{
+    height: 350px;
+}
+
+#panel-registro-nuevo{
+    height: 830px;
+}
+
+/* terminos y condiciones */
+.pase-subnav .terms{
+    display: none;
+    height: 750px;
+    margin-right: -20px;
+}
+.pase-subnav .terms h6{
+    width: 210px;
+    margin-bottom: 12px;
+    float: left;
+    line-height: 18px;
+    font-weight: bold;
+    font-size: 16px;
+}
+.pase-subnav .terms p{
+    line-height: 18px;
+    font-weight: normal;
+    color: #434343;
+}
+.pase-subnav .terms a{
+    color: #434343;
+}
+.pase-subnav .terms li{
+    font-size: 12px;
+    line-height: 18px;
+}
+
+/* usuario logueado */
+.pase_LoggedIn .widget-ingreso .icon-ingreso{
+    display: block;
+    float: left;
+    margin: 18px 10px 0;
+}
+.widget-ingreso .hola{
+    float: left;
+}
+.pase_LoggedIn .opciones{
+    position: absolute;
+}
+.pase_LoggedIn{
+    height: 66px;
+}
+.pase_LoggedIn .subnav{
+    top: 66px;
+    left: auto;
+    z-index: 9999;
+    padding: 1px;
+    margin-left: -20px;
+}
+.pase_LoggedIn .subnav ul{
+    background: #FFF;
+    padding: 10px 20px;
+    border: solid 1px #CCC;
+}
+.pase_LoggedIn .subnav ul li.toggle{
+    border-top: solid 1px #f2eee5;
+    margin-top: 4px;
+    padding-top: 4px;
+}
+.pase_LoggedIn .subnav ul li a:hover{
+    color: #000;
+}
+.widget-txt.widget-ingreso.flecha{
+    cursor: pointer;
+    padding-right: 0px;
+    min-width: 112px;
+}
+.widget.gigyaModules.active{
+    background: #434142;
+}
+.widget.gigyaModules.active span, .widget.gigyaModules.active .nombre{
+    color: #FFF;
+}
+.widget.gigyaModules.active .icon-ingreso{
+    background-position: -134px -67px;
+}
+.layout .fondo .cont{
+    background: red;
+}
+
+/*Modal activacion*/
+
+
+#popupInfoActivaCuenta.modal-activacion {width: 336px;height: 200px; background: url('../images/bg-transparent-black_gygia.png') repeat; border: 2px solid #fff;padding: 10px;position: absolute;left: 285px !important;;top: 151px;text-align: center;}
+#popupInfo.modal-activacion {width: 100%;height: 100%; background: url('../images/bg-transparent-black_gygia.png') repeat;padding-top: 150px;position: absolute;left: 0 !important;top: 0;text-align: center;}
+
+#popupInfoActivaCuenta.modal-activacion  {width: 316px; padding:10px}
+#popupInfo.modal-activacion h3 {font-family: arial;color: #fff;font-size: 24px;font-weight: bold;margin: 30px 0 20px;text-transform: uppercase;}
+#popupInfo.modal-activacion p , #popupInfoActivaCuenta.modal-activacion  p  {font-family: arial;color: #fff;font-size: 14px;font-weight: bold}
+#popupInfo.modal-activacion p {padding: 0 32px;}
+#popupInfoActivaCuenta.modal-activacion  p {padding: 60px 32px 23px;}
+#popupInfo.modal-activacion a , #popupInfoActivaCuenta.modal-activacion  a {font-family: arial;background: #D02128;color: #FFFFFF;display: block;font-size: 13px;font-weight: bold;height: 20px;line-height: 19px;margin: 0 auto;padding: 8px;text-decoration: none;text-transform: uppercase;width: 100px;}

@@ -1,0 +1,75 @@
+var sasCornerConfig = {
+	flash: {
+		id: 'sas_flash_12240382',
+		url: 'http://ced.sascdn.com/diff/1151/3953948/b_elpais-emedemujer-frases_elpais_peelpage.swf',
+		flashVars: 'insertionId=3953948&target=_blank&clicktag=' + escape('http://www5.smartadserver.com/diff/1151/3953948/go21.asp?3953948%3B491402%3B3373536487799424270%3B3326572168%3BM%3Bsystemtarget=%24qc%3d1306999027%3b%24ql%3dmedium%3b%24qpc%3d11000%3b%24qpp%3d0%3b%24qt%3d237_2078_12578t%3b%24dma%3d0%3b%24b%3d16460%3b%24o%3d11061%3b%24sh%3d768%3b%24sw%3d1280%3Btarget=tag%3b%3b%24dt%3d1t%3b%24hc%3B12240382%3Bclickvars=') + '&clickTag=' + escape('http://www5.smartadserver.com/diff/1151/3953948/go21.asp?3953948%3B491402%3B3373536487799424270%3B3326572168%3BM%3Bsystemtarget=%24qc%3d1306999027%3b%24ql%3dmedium%3b%24qpc%3d11000%3b%24qpp%3d0%3b%24qt%3d237_2078_12578t%3b%24dma%3d0%3b%24b%3d16460%3b%24o%3d11061%3b%24sh%3d768%3b%24sw%3d1280%3Btarget=tag%3b%3b%24dt%3d1t%3b%24hc%3B12240382%3Bclickvars=') + '&clickTAG=' + escape('http://www5.smartadserver.com/diff/1151/3953948/go21.asp?3953948%3B491402%3B3373536487799424270%3B3326572168%3BM%3Bsystemtarget=%24qc%3d1306999027%3b%24ql%3dmedium%3b%24qpc%3d11000%3b%24qpp%3d0%3b%24qt%3d237_2078_12578t%3b%24dma%3d0%3b%24b%3d16460%3b%24o%3d11061%3b%24sh%3d768%3b%24sw%3d1280%3Btarget=tag%3b%3b%24dt%3d1t%3b%24hc%3B12240382%3Bclickvars=') + '',
+		version: Number(9),
+		width: '400',
+		height: '400',
+		wMode: 'Transparent'
+	},
+
+	backupImage: {
+		id: 'sas_noFlashImage_12240382',
+		url: 'http://ced.sascdn.com/images/pixel.gif',
+		clickUrl: 'http://www5.smartadserver.com/diff/1151/3953948/go20.asp?3953948%3B491402%3B3373536487799424270%3B3326572168%3BM%3Bsystemtarget=%24qc%3d1306999027%3b%24ql%3dmedium%3b%24qpc%3d11000%3b%24qpp%3d0%3b%24qt%3d237_2078_12578t%3b%24dma%3d0%3b%24b%3d16460%3b%24o%3d11061%3b%24sh%3d768%3b%24sw%3d1280%3Btarget=tag%3b%3b%24dt%3d1t%3b%24hc%3B12240382%3Bclickvars=',
+		clickTarget: '_blank',
+		width: '1',
+		height: '1',
+		altText: ''
+	},
+
+	zIndex: '5000',
+	verticalPosition: 'top',
+	horizontalPosition: 'right', 
+	collapsedWidth: '170',
+	collapsedHeight: '140',
+	collapseTimeout: '1000',
+	siteWidth: '',
+	sitePosition: 'left',
+
+	insertionId: 3953948,
+	formatId: 27839,
+	navigatorFlashVersion: Number(navigatorFlashVersion())
+};
+
+var sasLib3953948Elt=document.createElement('script');
+sasLib3953948Elt.src='http://cdn1.smartadserver.com/diff/templates/js/corner/sas-corner-1.1.js';
+
+if(typeof(sas_ajax)!='undefined'&&sas_ajax){
+	sas_appendToContainer(27839,sasLib3953948Elt);
+
+	if ('\r\n' != '\r\n') {
+		var getDomElem = function(id) {
+			return document.getElementById(id).contentDocument || document.frames[id].document;
+		}
+
+		var sas_customScript27839 = document.createElement('iframe');
+		sas_customScript27839.id = 'sas_3953948_iframe';
+		sas_customScript27839.scrolling = 'no';
+		sas_customScript27839.frameBorder = 0;
+		sas_customScript27839.width = 1;
+		sas_customScript27839.height = 1;
+		sas_customScript27839.style.position = 'absolute';
+		sas_customScript27839.style.margin = 0;
+		sas_customScript27839.style.padding = 0;
+		sas_customScript27839.style.width = '1px';
+		sas_customScript27839.style.height = '1px';
+		sas_appendToContainer(27839, sas_customScript27839);
+
+		sas_customScript27839.doc = getDomElem(sas_customScript27839.id);
+		sas_customScript27839.doc.write(
+			'<!doctype html><html><head><title></title></head><body style="margin:0;padding:0">'+
+			'\r\n'+
+			'</body></html>'
+		);
+		if (navigator.userAgent.indexOf('MSIE') == -1 && navigator.userAgent.indexOf('Opera') == -1) sas_customScript27839.doc.close();
+	}
+}else{
+	var head = document.getElementsByTagName('head')[0];
+	head.appendChild(sasLib3953948Elt);
+	document.write('\r\n');
+	document.write('\r\n');
+}
+function navigatorFlashVersion(){navigatorFlashVersion.gfp=function(){var v=[0,0,0];if(navigator.plugins&&navigator.mimeTypes.length){var x=navigator.plugins["Shockwave Flash"];if(x&&x.version)return x.version.split('.');else if(x&&x.description)return x.description.replace(/([a-zA-Z]|\s)+/,"").replace(/(\s+r|\s+b[0-9]+)/,".").split('.');}else{var axo;try{axo=new ActiveXObject("ShockwaveFlash.ShockwaveFlash.7");}catch(e){try{var axo=new ActiveXObject("ShockwaveFlash.ShockwaveFlash.6");v=[6,0,21];axo.AllowScriptAccess="always";}catch(e){if(v[0]==6)return v;}try{axo=new ActiveXObject("ShockwaveFlash.ShockwaveFlash");}catch(e){}
+}if(axo!=null)return axo.GetVariable('$version').split(' ')[1].split(',');}return v;}; navigatorFlashVersion.v=navigatorFlashVersion.gfp();var myMajorFlashVersion = (navigatorFlashVersion.v.length > 0) ? navigatorFlashVersion.v[0] : 0;var myMinorFlashVersion = (navigatorFlashVersion.v.length > 1) ? navigatorFlashVersion.v[1] : 0;     if (navigator.userAgent.toLowerCase().indexOf("firefox") >= 0 && (myMajorFlashVersion < 18 || myMajorFlashVersion == 18 && navigatorFlashVersion.v.length > 3 && navigatorFlashVersion.v[3] < 209)) { myMajorFlashVersion = 0; }else if(myMajorFlashVersion == 10 && myMinorFlashVersion == 2){ myMajorFlashVersion = 11; }else if(myMajorFlashVersion == 10 && myMinorFlashVersion >= 3){ myMajorFlashVersion = 12; }else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 0){ myMajorFlashVersion = 13; }else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 1){ myMajorFlashVersion = 14; }else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 2){ myMajorFlashVersion = 15; }else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 3){ myMajorFlashVersion = 16; } else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 4){ myMajorFlashVersion = 17; } else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 5){ myMajorFlashVersion = 18; } else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 6){ myMajorFlashVersion = 19; } else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 7){ myMajorFlashVersion = 20; } else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 8){ myMajorFlashVersion = 21; } else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 9){ myMajorFlashVersion = 22; } else if(myMajorFlashVersion >= 12 && myMajorFlashVersion < 18){ myMajorFlashVersion += 11; } else if(myMajorFlashVersion >= 18){ myMajorFlashVersion = 29; } return myMajorFlashVersion;}

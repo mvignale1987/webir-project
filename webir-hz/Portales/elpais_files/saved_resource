@@ -1,0 +1,6 @@
+var EP_VIDEO_ADS = {
+            '/tvshow': {
+                'ads_preroll' : 'http://usa2.elpais.com.uy/anexos/multimedio/08/09/26/CYMACO_VCD2.flv'
+            }
+
+    };

@@ -6,10 +6,10 @@ var request = require("request"),
     arrayUrls = new Array(),
     existe=false;
 
-    var diario= 'nytimes';
+    var diario= 'elpais';
 
     //Si es true porque estoy laburando local sin internet, sino accediendo directamente de internet.
-    if(true)
+    if(false)
     {
         //Levanto el archivo .html que quiero analizar previamente bajado.
         var htmlString = fs.readFileSync('./Portales/' + diario + '.html').toString();
@@ -17,13 +17,13 @@ var request = require("request"),
         //"a[id]" - Selecciona todos los elementos "a" que contengan el atributo id.
         //"a[href]" - Selecciona todos los elementos "a" que contengan el atributo href.
         //"div" - Selecciona todos los elementos div.
-       
+
         /*
         //Obtengo los div que contiene un enlace "a".
         $('div:has(a[href])').each(function(){
             var url =  $(this);
             //var href = $("a[href]").attr("href");
-            
+
             //urls.push(href);
             urls.push(url);
         });
@@ -33,7 +33,7 @@ var request = require("request"),
             var $a =  $(this);
             var $div = $a.closest('div');
             var $href = $a.attr('href');
-            
+
             //Verifico si la url pertenece al arreglo.
             for(var i=0; i<arrayUrls.length; i++)
             {
@@ -52,7 +52,7 @@ var request = require("request"),
             }
             existe=false;
         });
-        
+
         //console.log(urls);
         //console.log(urls[0]);
         //console.log(arrayUrls.length);
@@ -61,7 +61,7 @@ var request = require("request"),
         //Elimino el archivo si es que esta previamente creado
         //fs.unlinkSync(diario + '.txt');
         //console.log('Archivo borrado!');
-        
+
         //Guardo el resultado obtenido en un archivo .txt.
         fs.writeFile(diario + '.txt', urls, function (err) {
           if (err) throw err;
@@ -73,7 +73,7 @@ var request = require("request"),
     {
         //Recorro para cada uno de los sitios.
         sitios.forEach(function(url){
-            
+
             //Obtengo una pagina .html desde la web.
             request(url, function (error, response, body) {
                 if (!error) {
@@ -108,6 +108,6 @@ var request = require("request"),
                     console.log("We’ve encountered an error: " + error);
                 }
             });
-            
-        });            
+
+        });
     }

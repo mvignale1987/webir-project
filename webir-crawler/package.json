@@ -2,6 +2,9 @@
   "name": "webir-crawler",
   "main": "crawler.js",
   "dependencies": {
-    "simplecrawler": "^0.5.3"
-    }
+    "async": "^1.4.2",
+    "colors": "^1.1.2",
+    "phantom": "^0.7.2",
+    "phantomjs": "^1.9.18",
+    "simplecrawler": "^0.5.3"    }
 }

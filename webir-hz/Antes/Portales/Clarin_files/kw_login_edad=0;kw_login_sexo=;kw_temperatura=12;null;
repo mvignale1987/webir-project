@@ -1,0 +1,247 @@
+   
+            var radarSettings = { zoneId: '1', customerId: '10077' };
+            (function (d, w) {
+                var onWindowLoaded = function () { var a = document.createElement('script'); a.type = 'text/javascript'; a.src = 'http://radar.cedexis.com/01-10077-radar10.min.js'; d.body.appendChild(a); };
+                if (w.location.protocol == 'https:') { return; }
+                if (w.addEventListener) { w.addEventListener('load', onWindowLoaded, false); }
+                else if (w.attachEvent) { w.attachEvent('onload', onWindowLoaded); }
+            })(document, window);
+        var SAS_3940316 = {
+		id : 3940316,
+		vPosition : "offset",
+		vOffset : 10,
+		lateralsWidth : 160 + 160 + 1024,
+        lateralsPosition : 'absolute',
+		lateralsIndex: 1200,
+		interIndex: 1200,
+		defaultInter: 0,
+		lateralsHeight : 0,
+		laterals : '',
+		margin: '',
+		interstitial : '',
+		tripleImpact: '',
+        capping: 1,
+		init : function(){
+			this.lateralsHeight = Math.max(600, 600);
+
+			if (this.vPosition == 'top') {
+				this.margin = "top:0%; margin-top:0px;";
+			} else if (this.vPosition == 'bottom') {
+				this.margin = "bottom:0%; margin-bottom:"+ this.lateralsHeight +"px;";
+			} else if (this.vPosition == 'offset') {
+				this.margin = "top:0%; margin-top:"+ this.vOffset +"px;";
+			} else { //center
+				this.margin = "top:50%; margin-top:-"+ this.lateralsHeight/2 +"px;";
+			}
+			
+			this.laterals = document.createElement("div");
+			this.laterals.style.cssText = 'text-align:center;left:50%;position:absolute;'+
+						'margin-left:-'+this.lateralsWidth/2+'px; z-index: '+ this.lateralsIndex +'; width:'+ this.lateralsWidth +'px; '+ this.margin;
+			lateralsHTML = '<div id="sas_lateral1_'+this.id+'" style="height:600px;position:'+this.lateralsPosition+';margin-left:-'+this.lateralsWidth/2+'px;left:50%;" onmouseover="SAS_3940316.xOpen()">';
+			if ('0' != '0') {
+				if ('0' == '2') {
+					if ((parseInt('') <= navigatorFlashVersion())) {
+						lateralsHTML += '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" '+
+'    codebase="http://www.adobe.com/go/getflashplayer" '+
+'	width="0" height="0" '+
+'	id="">'+
+'	<param name="movie" value="">'+
+'	<param name="flashVars" value="">'+
+'	<param name="wmode" value="">'+
+'	<param name="quality" value="high">'+
+'	<param name="swLiveConnect" value="true">'+
+'	<param name="allowScriptAccess" value="always" />'+
+'	<embed name="" '+
+'		src=""'+
+'        flashVars=""'+
+'        wmode=""'+
+'    	quality="high" '+
+'		width="0" '+
+'		height="0" '+
+'		allowScriptAccess="always" '+
+'		type="application/x-shockwave-flash" '+
+'		pluginspage="http://www.adobe.com/go/getflashplayer">'+
+'	</embed>'+
+'</object>';
+					} else {
+						lateralsHTML += '<a target="" href="">'+
+'    <img id="" src="" alt="" width="0" height="0" border="0">'+
+'</a>';
+					}
+				} else {
+					lateralsHTML += '<a target="" href="">'+
+'    <img id="" src="" alt="" width="0" height="0" border="0">'+
+'</a>';
+				}
+				lateralsHTML += '<!-- Beginning PassBack for Ad unit agea/Clarin_2015/Home/SkyIzq160x600 ### size: [[160,600]] -->\r\n'+'	<scr'+'ipt type=\'text/javascript\' src=\'http://www.googletagservices.com/tag/js/gpt.js\'>\r\n'+'		googletag.pubads().definePassback(\'8746/agea/Clarin_2015/Home/SkyIzq160x600\', [[160,600]]).setClickUrl(\'[INSERT_CLICK_COUNTER_HERE]\').display();\r\n'+'	</scr'+'ipt>\r\n'+'<!-- End Passback -->\r\n';
+			}else {
+				iframe = document.createElement('iframe');
+				iframe.src = 'http://ww619.smartadserver.com/diff/619/3940316/show1_1.asp?3940316;228583;8897811659725817092;8167515963;M;systemtarget=%24qc%3d1306999027%3b%24ql%3dmedium%3b%24qpc%3d11000%3b%24qpp%3d0%3b%24qt%3d237_2078_12578t%3b%24dma%3d0%3b%24b%3d16460%3b%24o%3d11061%3b%24sh%3d768%3b%24sw%3d1280;target=%24iab%3d12t%3bkw_login_edad%3d0%3bkw_login_sexo%3bkw_temperatura%3d12%3bnull%3b%3b%24hc';
+				iframe.frameBorder = '0';
+				iframe.scrolling = 'no';
+				iframe.allowTransparency = 'true';
+				iframe.style.cssText = 'height:600px;width:160px;';
+				tmp = document.createElement('div');
+				tmp.appendChild(iframe);
+				lateralsHTML += tmp.innerHTML;
+			}
+			lateralsHTML += '</div><div id="sas_lateral2_'+this.id+'" style="height:600px;position:'+this.lateralsPosition+';margin-right:-'+this.lateralsWidth/2+'px;right:50%;">';
+			if ('0' != '0') {
+				if ('0' == '2')  {
+					if ((parseInt('') <= navigatorFlashVersion())) {
+						lateralsHTML += '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" '+
+'    codebase="http://www.adobe.com/go/getflashplayer" '+
+'	width="0" height="0" '+
+'	id="">'+
+'	<param name="movie" value="">'+
+'	<param name="flashVars" value="">'+
+'	<param name="wmode" value="">'+
+'	<param name="quality" value="high">'+
+'	<param name="swLiveConnect" value="true">'+
+'	<param name="allowScriptAccess" value="always" />'+
+'	<embed name="" '+
+'		src=""'+
+'        flashVars=""'+
+'        wmode=""'+
+'    	quality="high" '+
+'		width="0" '+
+'		height="0" '+
+'		allowScriptAccess="always" '+
+'		type="application/x-shockwave-flash" '+
+'		pluginspage="http://www.adobe.com/go/getflashplayer">'+
+'	</embed>'+
+'</object>';
+					} else {
+						lateralsHTML += '<a target="" href="">'+
+'    <img id="" src="" alt="" width="0" height="0" border="0">'+
+'</a>';
+					}
+				} else {
+					lateralsHTML += '<a target="" href="">'+
+'    <img id="" src="" alt="" width="0" height="0" border="0">'+
+'</a>';
+				}
+				lateralsHTML += '<!-- Beginning PassBack for Ad unit agea/Clarin_2015/Home/SkyDer160x600 ### size: [[160,600]] -->\r\n'+'	<scr'+'ipt type=\'text/javascript\' src=\'http://www.googletagservices.com/tag/js/gpt.js\'>\r\n'+'		googletag.pubads().definePassback(\'8746/agea/Clarin_2015/Home/SkyDer160x600\', [[160,600]]).setClickUrl(\'[INSERT_CLICK_COUNTER_HERE]\').display();\r\n'+'	</scr'+'ipt>\r\n'+'<!-- End Passback -->\r\n';
+			}else {
+				iframe = document.createElement('iframe');
+				iframe.src = 'http://ww619.smartadserver.com/diff/619/3940316/show1_2.asp?3940316;228583;8897811659725817092;8167515963;M;systemtarget=%24qc%3d1306999027%3b%24ql%3dmedium%3b%24qpc%3d11000%3b%24qpp%3d0%3b%24qt%3d237_2078_12578t%3b%24dma%3d0%3b%24b%3d16460%3b%24o%3d11061%3b%24sh%3d768%3b%24sw%3d1280;target=%24iab%3d12t%3bkw_login_edad%3d0%3bkw_login_sexo%3bkw_temperatura%3d12%3bnull%3b%3b%24hc';
+				iframe.frameBorder = '0';
+				iframe.scrolling = 'no';
+				iframe.allowTransparency = 'true';
+				iframe.style.cssText = 'height:600px;width:160px;';
+				tmp = document.createElement('div');
+				tmp.appendChild(iframe);
+				lateralsHTML += tmp.innerHTML;
+			}
+			lateralsHTML += '</div>';
+			this.laterals.innerHTML = lateralsHTML;
+			
+			this.tripleImpact = document.createElement("div");
+			this.tripleImpact.innerHTML = '\r\n';
+			this.tripleImpact.appendChild(this.laterals);
+
+			if(1){
+				if ('1' != '0') {
+					this.interstitial = document.createElement("div");
+					this.interstitial.id = "sas_inter_"+this.id;
+
+					if (this.vPosition == 'top') {
+						this.margin = "top:0%; margin-top:0px;";
+					} else if (this.vPosition == 'bottom') {
+						this.margin = "bottom:0%; margin-bottom: 0px;";
+					} else if (this.vPosition == 'offset') {
+						this.margin = "top:0%; margin-top:"+ this.vOffset +"px;";
+					} else { //center
+						this.margin = "top:50%; margin-top:-"+ 1/2 +"px;";
+					}
+					
+					this.interstitial.style.cssText = 'position: '+ this.lateralsPosition +'; display:none; left:50%;'+ this.margin +
+										'z-index: '+ this.interIndex +'; width:1px;margin-left:-'+1/2+'px;height:1px;';
+					if ('1' == '2')  {
+						if ((parseInt('') <= navigatorFlashVersion())) {
+							creativeFlash = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" '+
+'    codebase="http://www.adobe.com/go/getflashplayer" '+
+'	width="0" height="0" '+
+'	id="">'+
+'	<param name="movie" value="">'+
+'	<param name="flashVars" value="">'+
+'	<param name="wmode" value="">'+
+'	<param name="quality" value="high">'+
+'	<param name="swLiveConnect" value="true">'+
+'	<param name="allowScriptAccess" value="always" />'+
+'	<embed name="" '+
+'		src=""'+
+'        flashVars=""'+
+'        wmode=""'+
+'    	quality="high" '+
+'		width="0" '+
+'		height="0" '+
+'		allowScriptAccess="always" '+
+'		type="application/x-shockwave-flash" '+
+'		pluginspage="http://www.adobe.com/go/getflashplayer">'+
+'	</embed>'+
+'</object>';
+							creativeFlash = creativeFlash.replace('\"flashVars\" value=\"', '\"flashVars\" value=\"toggle=toggle_'+this.id+'()&');
+							creativeFlash = creativeFlash.replace('flashVars=\"', 'flashVars=\"toggle=toggle_'+this.id+'()&');
+							this.interstitial.innerHTML = creativeFlash;
+						} else {
+							this.interstitial.innerHTML = '<a target="" href="">'+
+'    <img id="" src="" alt="" width="0" height="0" border="0">'+
+'</a>';
+						}
+					} else {
+						this.interstitial.innerHTML = '<a target="_blank"  href="http://ww619.smartadserver.com/diff/619/3940316/go9.asp?3940316%3B228583%3B8897811659725817092%3B8167515963%3BM%3Bsystemtarget=%24qc%3d1306999027%3b%24ql%3dmedium%3b%24qpc%3d11000%3b%24qpp%3d0%3b%24qt%3d237_2078_12578t%3b%24dma%3d0%3b%24b%3d16460%3b%24o%3d11061%3b%24sh%3d768%3b%24sw%3d1280%3Btarget=%24iab%3d12t%3bkw_login_edad%3d0%3bkw_login_sexo%3bkw_temperatura%3d12%3bnull%3b%3b%24hc%3B12198208%3Bclickvars=">'+
+'    <img id="sas_image_12198208" src="http://ced.sascdn.com/diff/619/3940316/1x1.JPG" alt="" width="1" height="1" border="0">'+
+'</a>';
+					}
+					this.interstitial.innerHTML += '\r\n';
+				}else {
+					this.interstitial = document.createElement('iframe');
+					this.interstitial.src = 'http://ww619.smartadserver.com/diff/619/3940316/show1_3.asp?3940316;228583;8897811659725817092;8167515963;M;systemtarget=%24qc%3d1306999027%3b%24ql%3dmedium%3b%24qpc%3d11000%3b%24qpp%3d0%3b%24qt%3d237_2078_12578t%3b%24dma%3d0%3b%24b%3d16460%3b%24o%3d11061%3b%24sh%3d768%3b%24sw%3d1280;target=%24iab%3d12t%3bkw_login_edad%3d0%3bkw_login_sexo%3bkw_temperatura%3d12%3bnull%3b%3b%24hc';
+					this.interstitial.frameBorder = '0';
+					this.interstitial.scrolling = 'no';
+					this.interstitial.allowTransparency = 'true';
+				}
+				this.tripleImpact.appendChild(this.interstitial);
+			}
+
+			tmp = document.createElement("div");
+                        tmp.innerHTML = '\r\n';
+                        this.tripleImpact.appendChild(tmp);
+
+		},
+		xClose : function(){
+			if(1)
+				SAS_3940316.interstitial.style.display = "none";
+		},
+		t1 : null,
+		xOpen : function(){
+			if(1 && SAS_3940316.capping >0 && SAS_3940316.interstitial.style.display == "none"){
+				if (SAS_3940316.t1) clearTimeout(SAS_3940316.t1);
+				SAS_3940316.tripleImpact.removeChild(SAS_3940316.interstitial);
+				SAS_3940316.tripleImpact.appendChild(SAS_3940316.interstitial);	
+				SAS_3940316.interstitial.style.display = "block";
+			    if(1) SAS_3940316.t1 = setTimeout("SAS_3940316.xClose()", 12000);
+                        SAS_3940316.capping -= 1;
+			}
+		}
+};
+function toggle_3940316() {
+	SAS_3940316.xClose();
+}
+SAS_3940316.init()
+if(typeof(sas_ajax)!='undefined'&&sas_ajax){
+	sas_appendToContainer(13955, SAS_3940316.tripleImpact);
+}else{
+	tmp = document.getElementsByTagName('script');
+	tmp = tmp[tmp.length - 1];
+	tmp.parentElement.appendChild(SAS_3940316.tripleImpact);
+}
+if(SAS_3940316.defaultInter){
+       SAS_3940316.xOpen();
+}
+
+
+
+function navigatorFlashVersion(){navigatorFlashVersion.gfp=function(){var v=[0,0,0];if(navigator.plugins&&navigator.mimeTypes.length){var x=navigator.plugins["Shockwave Flash"];if(x&&x.version)return x.version.split('.');else if(x&&x.description)return x.description.replace(/([a-zA-Z]|\s)+/,"").replace(/(\s+r|\s+b[0-9]+)/,".").split('.');}else{var axo;try{axo=new ActiveXObject("ShockwaveFlash.ShockwaveFlash.7");}catch(e){try{var axo=new ActiveXObject("ShockwaveFlash.ShockwaveFlash.6");v=[6,0,21];axo.AllowScriptAccess="always";}catch(e){if(v[0]==6)return v;}try{axo=new ActiveXObject("ShockwaveFlash.ShockwaveFlash");}catch(e){}
+}if(axo!=null)return axo.GetVariable('$version').split(' ')[1].split(',');}return v;}; navigatorFlashVersion.v=navigatorFlashVersion.gfp();var myMajorFlashVersion = (navigatorFlashVersion.v.length > 0) ? navigatorFlashVersion.v[0] : 0;var myMinorFlashVersion = (navigatorFlashVersion.v.length > 1) ? navigatorFlashVersion.v[1] : 0;     if (navigator.userAgent.toLowerCase().indexOf("firefox") >= 0 && (myMajorFlashVersion < 18 || myMajorFlashVersion == 18 && navigatorFlashVersion.v.length > 3 && navigatorFlashVersion.v[3] < 209)) { myMajorFlashVersion = 0; }else if(myMajorFlashVersion == 10 && myMinorFlashVersion == 2){ myMajorFlashVersion = 11; }else if(myMajorFlashVersion == 10 && myMinorFlashVersion >= 3){ myMajorFlashVersion = 12; }else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 0){ myMajorFlashVersion = 13; }else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 1){ myMajorFlashVersion = 14; }else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 2){ myMajorFlashVersion = 15; }else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 3){ myMajorFlashVersion = 16; } else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 4){ myMajorFlashVersion = 17; } else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 5){ myMajorFlashVersion = 18; } else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 6){ myMajorFlashVersion = 19; } else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 7){ myMajorFlashVersion = 20; } else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 8){ myMajorFlashVersion = 21; } else if(myMajorFlashVersion == 11 && myMinorFlashVersion == 9){ myMajorFlashVersion = 22; } else if(myMajorFlashVersion >= 12 && myMajorFlashVersion < 18){ myMajorFlashVersion += 11; } else if(myMajorFlashVersion >= 18){ myMajorFlashVersion = 29; } return myMajorFlashVersion;}

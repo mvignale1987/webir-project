@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://elpaistv.com.uy/widgets/cintillo-epd.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <title>elpaistv.com.uy</title>
+        <link href="css" rel="stylesheet" type="text/css">
+        <style type="text/css">
+            body { margin: 0px; padding: 0px;}
+            .cintillo_ept {background:#4d4d4d; border: 1px solid #d6d6d6;box-shadow: 0 0 4px 1px rgba(199, 205, 208, 0.8);margin: 0 auto; width: 980px;height:6em;font-family:"Oswald";  padding-top: 0.5em;color: #fff;}
+            .cintillo_ept a {color: #fff;}
+            .cintillo_ept ul {float:left;width:23%;margin:0;padding:0;}
+            .cintillo_ept ul li {height: 4.7em;list-style: outside none none; overflow: hidden; margin:0 0.2em 0 0; float: left;}
+            .cintillo_ept ul img {float:left; border-left: 1px dotted #fff;padding: 0 0 0 0.5em;}
+            .cintillo_ept ul h3 {color: #fff;font-size:13px;font-weight:300;line-height:119%;margin: 0 0 0 0.2em;padding:0; width:100px;}
+            .cintillo_ept ul li ul {float:left;margin: 0.8em 0 0; padding: 0 0.1em 0.1em 0;width:inherit;}
+            .cintillo_ept ul li ul li:nth-child(1) { list-style: none; float: left;width:50%;}
+            .cintillo_ept .logo {display:block;float:left;width:270px;  margin-right: 0.6em;}
+            .cintillo_ept figure {margin:0;padding:0;}
+        </style>
+        <script type="text/javascript" src="jquery.min(1).js"></script>
+    </head>
+    <body>
+        <div class="cintillo_ept" id="items_container">
+            <a target="_blank" border="0" href="http://elpaistv.com.uy/?utm_source=EPD&utm_medium=banners-eptv&utm_campaign=elpaistv&utm_content=logo" class="logo">
+                <figure><img src="logo_eptv.png" border="0" alt="El País TV"></figure>
+            </a>
+        <ul><a border="0" href="http://elpaistv.com.uy/videos/tv-show/noticias-espectaculo-1439?utm_source=EPD&utm_medium=banners-eptv&utm_campaign=elpaistv&utm_content=vod1" target="_blank"><li><ul><li><span class="play-icon"></span><img width="101" height="62" alt="El País TV" src="veranoperfecto.jpg" border="0"></li><li><h3>Las noticias del espectáculo en TV Show</h3></li></ul></li></a></ul><ul><a border="0" href="http://elpaistv.com.uy/videos/a-diario/presion-tributaria-1428?utm_source=EPD&utm_medium=banners-eptv&utm_campaign=elpaistv&utm_content=vod2" target="_blank"><li><ul><li><span class="play-icon"></span><img width="101" height="62" alt="El País TV" src="Debate 3.jpg" border="0"></li><li><h3>Los rebeldes del FA y la libertad de pensamiento</h3></li></ul></li></a></ul><ul><a border="0" href="http://elpaistv.com.uy/videos/a-diario/no-le-creo-a-astori-1403?utm_source=EPD&utm_medium=banners-eptv&utm_campaign=elpaistv&utm_content=vod3" target="_blank"><li><ul><li><span class="play-icon"></span><img width="101" height="62" alt="El País TV" src="Pou 1.jpg" border="0"></li><li><h3>"No le creo a Astori"</h3></li></ul></li></a></ul></div>
+              
+        <script type="text/javascript">
+           function shorten(text, maxLength) {
+                var ret = text;
+                if (ret.length > maxLength) {
+                    ret = ret.substr(0, maxLength - 3) + '...';
+                }
+                return ret;
+            }
+            $(document).ready(function () {
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    url: '/api/v1/vod?keywords=cintillo_home_epd&limit=3',
+                    success: function (data) {
+                        $.each(data.items, function (index, elem) {
+                            $('#items_container').append("<ul><a border='0' href='" + elem.url + "?utm_source=EPD&amp;utm_medium=banners-eptv&amp;utm_campaign=elpaistv&amp;utm_content=vod" + (index + 1) + "' target='_blank'><li><ul><li><span class='play-icon'></span><img width='101' height='62' alt='El País TV' src='" + elem.thumbnail + "'  border='0' /></li><li><h3>" + shorten(elem.title, 69) + "</h3></li></ul></li></a></ul>");
+                        });
+                    }
+                });
+            });
+        </script>
+    
+</body></html>

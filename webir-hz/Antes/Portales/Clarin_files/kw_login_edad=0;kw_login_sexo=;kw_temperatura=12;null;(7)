@@ -1,0 +1,35 @@
+(function(w, d){
+	if (typeof(sas_ajax) != 'undefined' && sas_ajax) {
+		var getDomElem = function(id) {
+			return d.getElementById(id).contentDocument || d.frames[id].document;
+		}
+
+		var i = d.createElement('iframe');
+		i.id = 'sas_3429840_iframe';
+		i.scrolling = 'no';
+		i.frameBorder = 0;
+		i.width = 950;
+		i.height = 90;
+		i.style.margin = 0;
+		i.style.padding = 0;
+		i.style.width = '950px';
+		i.style.height = '90px';
+		sas_appendToContainer(15586, i);
+
+		i.doc = getDomElem(i.id);
+		i.doc.write(
+			'<!doctype html><html><head><title></title></head><body style="margin:0;padding:0">'+
+			'<scr'+'ipt type="text/javascript">var inDapIF=inDapMgrIf=true;</scr'+'ipt>'+
+			'<scr'+'ipt type="text/javascript"><!--\r\n'+'google_ad_client = "ca-pub-1957917773416511";\r\n'+'/* 950x90 - Banner NS3 */\r\n'+'google_ad_slot = "2662955242";\r\n'+'google_ad_width = 950;\r\n'+'google_ad_height = 90;\r\n'+'google_page_url = "http://www.clarin.com/";\r\n'+'//-->\r\n'+'</scr'+'ipt>\r\n'+'<scr'+'ipt type="text/javascript"\r\n'+'src="//pagead2.googlesyndication.com/pagead/show_ads.js">\r\n'+'</scr'+'ipt>\r\n'+'\r\n'+
+			'</body></html>'
+		);
+
+		if (navigator.userAgent.indexOf('MSIE') == -1 && navigator.userAgent.indexOf('Opera') == -1) i.doc.close();
+	} else {
+		d.write('<scr'+'ipt type="text/javascript"><!--\r\n'+'google_ad_client = "ca-pub-1957917773416511";\r\n'+'/* 950x90 - Banner NS3 */\r\n'+'google_ad_slot = "2662955242";\r\n'+'google_ad_width = 950;\r\n'+'google_ad_height = 90;\r\n'+'google_page_url = "http://www.clarin.com/";\r\n'+'//-->\r\n'+'</scr'+'ipt>\r\n'+'<scr'+'ipt type="text/javascript"\r\n'+'src="//pagead2.googlesyndication.com/pagead/show_ads.js">\r\n'+'</scr'+'ipt>\r\n'+'\r\n');
+	}
+})(window, document);
+
+
+
+

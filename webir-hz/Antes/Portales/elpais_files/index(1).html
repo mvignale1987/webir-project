@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- saved from url=(0456)http://ced.sascdn.com/diff/1151/4708248/208_300x250/index.html?clicktag=http://www5.smartadserver.com/h/cc?imgid=14181839__insid=4708248__pgid=491402__uid=3373536487799424270__tgt=tag%3d%3b%3b%24dt%3d1t%3b%24hc__systgt=%24qc%3d1306999027%3b%24ql%3dmedium%3b%24qpc%3d11000%3b%24qpp%3d0%3b%24qt%3d237_2078_12578t%3b%24dma%3d0%3b%24b%3d16460%3b%24o%3d11061__go=http%3a%2f%2fads3.initiative.com.uy%2fopenx%2fwww%2fdelivery%2fck.php%3fzoneid%3d3577&sasfid=27528 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+
+<title>CreateJS export from 208_300x250</title>
+
+<script src="easeljs-0.6.0.min.js"></script>
+<script src="tweenjs-0.4.0.min.js"></script>
+<script src="movieclip-0.6.0.min.js"></script>
+<script src="preloadjs-0.3.0.min.js"></script>
+<script src="208_300x250.js"></script>
+
+<script>
+var canvas, stage, exportRoot;
+
+function init() {
+	createjs.MotionGuidePlugin.install();
+
+	canvas = document.getElementById("canvas");
+	images = images||{};
+
+	var manifest = [
+		{src:"images/Mesh.png", id:"Mesh"},
+		{src:"images/Mesh_1.png", id:"Mesh_1"},
+		{src:"images/_1.jpg", id:"_1"},
+		{src:"images/_208_carroceria.png", id:"_208_carroceria"},
+		{src:"images/carroceria_azulpngcopy.png", id:"carroceria_azulpngcopy"},
+		{src:"images/fondo.jpg", id:"fondo"},
+		{src:"images/interior.jpg", id:"interior"},
+		{src:"images/MOTION_TXT.png", id:"MOTION_TXT"},
+		{src:"images/rueda.png", id:"rueda"},
+		{src:"images/ruedapngcopy.png", id:"ruedapngcopy"}
+	];
+
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	loader.loadManifest(manifest);
+}
+
+function handleFileLoad(evt) {
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
+
+function handleComplete() {
+	exportRoot = new lib._208_300x250();
+
+	stage = new createjs.Stage(canvas);
+	stage.addChild(exportRoot);
+	stage.update();
+	stage.enableMouseOver();
+
+	createjs.Ticker.setFPS(24);
+	createjs.Ticker.addEventListener("tick", stage);
+}
+</script>
+</head>
+
+<body onload="init();" style="background-color:#fff; margin:0">
+<script>
+function get_url_param( name ){
+name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+var regexS = "[\\?&]"+name+"=([^&#]*)";
+var regex = new RegExp( regexS );
+var results = regex.exec( window.location.href );
+if ( results == null )return "";
+else return String(results[1]).replace(/__/g, '&');
+}
+var clickURL = get_url_param('clicktag');
+</script>
+	<a href="http://ced.sascdn.com/diff/1151/4708248/208_300x250/index.html?clicktag=http://www5.smartadserver.com/h/cc?imgid=14181839__insid=4708248__pgid=491402__uid=3373536487799424270__tgt=tag%3d%3b%3b%24dt%3d1t%3b%24hc__systgt=%24qc%3d1306999027%3b%24ql%3dmedium%3b%24qpc%3d11000%3b%24qpp%3d0%3b%24qt%3d237_2078_12578t%3b%24dma%3d0%3b%24b%3d16460%3b%24o%3d11061__go=http%3a%2f%2fads3.initiative.com.uy%2fopenx%2fwww%2fdelivery%2fck.php%3fzoneid%3d3577&sasfid=27528#" onclick="window.open(clickURL,&#39;_blank&#39;)"><canvas id="canvas" width="300" height="250" style="background-color:#ffffff"></canvas></a>
+
+</body></html>

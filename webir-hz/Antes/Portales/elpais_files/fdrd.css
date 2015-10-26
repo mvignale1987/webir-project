@@ -1,0 +1,20 @@
+@charset"utf-8";.fdrd-gallito{border:solid 1px #CCCCCC;text-align:left;overflow:hidden;font-family:Arial, Helvetica, sans-serif;background-color:#FFFFFF;}
+.fdrd-gallito .fdrd-channelTitleDiv{position:relative;left:876px;top:68px;width:85px;height:20px;}
+.fdrd-gallito .fdrd-channelTitleDiv a.fdrd-channelTitle{color:#FFFFFF;font-family:"Times New Roman", Times, serif;font-size:16px;text-decoration:none;font-weight:bold;width:85px;height:20px;background:none;margin:0px;padding:0px;}
+.fdrd-gallito .fdrd-channelTitleDiv a.fdrd-channelTitle:hover{text-decoration:underline;}
+.fdrd-gallito .fdrd-channelTitleDiv a.fdrd-channelTitle img.fdrd-channelLogo{border:none;width:85px;height:20px;}
+.fdrd-gallito .fdrd-channelTitleDiv a.fdrd-channelTitle .fdrd-channelTitleSpan{}
+.fdrd-gallito .fdrd-feeds{position:relative;font-size:11px;margin:2px 5px;line-height:normal;top:-20px;}
+.fdrd-gallito .fdrd-feeds .fdrd-entryDiv{width:316px;float:left;padding:2px;}
+.fdrd-gallito .fdrd-feeds .fdrd-entryDiv .fdrd-entryTitleDiv{font-size:14px;font-weight:bold;text-align:left;margin-top:10px;}
+.fdrd-gallito .fdrd-feeds .fdrd-entryDiv .fdrd-entryTitleDiv a.fdrd-entryTitleLink{color:#3863B4;white-space:normal;width:100%;background:none;margin:0px;padding:0px;}
+.fdrd-gallito .fdrd-feeds .fdrd-entryDiv .fdrd-entryImageDiv{margin:3px 5px 3px 0px;float:left;}
+.fdrd-gallito .fdrd-feeds .fdrd-entryDiv .fdrd-entryImage{border:solid 3px #DDDDDD;width:auto;max-width:100px;height:70px;}
+.fdrd-gallito .fdrd-feeds .fdrd-entryDiv .fdrd-entryBodyLink{text-decoration:none;text-align:left;color:#666666;background:none;margin:0px;padding:0px;}
+.fdrd-gallito .fdrd-feeds .fdrd-entryDiv .fdrd-entryBodyLink:hover{text-decoration:none;}
+.fdrd-gallito .fdrd-feeds .fdrd-entryDiv .fdrd-entryBodyLink p{text-decoration:none;margin:0px;padding:0px;line-height:normal;}
+.fdrd-gallito .fdrd-feeds .fdrd-entryDiv .fdrd-entryBodyLink p a{text-decoration:none;color:#666666;background:none;margin:0px;padding:0px;}
+.fdrd-gallito .fdrd-feeds .fdrd-entryDiv .fdrd-entryBodyLink p a:hover{text-decoration:none;}
+.fdrd-gallito .fdrd-feeds .fdrd-entryDiv .fdrd-entryBodyLink p a:hover span{color:#FF0000;}
+.fdrd-gallito .fdrd-feeds .fdrd-entryDiv .fdrd-entryBodyLink p a span{font-weight:bold;}
+.fdrd-gallito .fdrd-feeds .fdrd-entryDiv .fdrd-entryDomainLink{font-size:10px;text-decoration:none;background:none;margin:0px;padding:0px;}

@@ -1,0 +1,15 @@
+OX_1150781835({
+  "ads":{
+    "medium":"w",
+    "record_tmpl":"http://uk-ads.openx.net/{medium}/1.0/{rtype}?bi=6b3bdf11-3da9-4c81-9f5a-101bb51d9cb4&ts={txn_state}",
+    "pixels":"http://eu-u.openx.net/w/1.0/pd?plm=6&ph=50ab0170-10fc-4aec-b816-8e01043433e7",
+    "adunits" : [
+      {
+        "auid":"538068193",
+        "size":"300x250",
+        "chain":[
+        ]
+      }
+    ]
+  }
+});

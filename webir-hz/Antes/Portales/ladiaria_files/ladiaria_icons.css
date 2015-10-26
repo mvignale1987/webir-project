@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'ladiaria_icons';
+    src: url('ladiaria_icons-webfont.eot');
+    src: url('ladiaria_icons-webfont.eot?#iefix') format('embedded-opentype'),
+         url('ladiaria_icons-webfont.woff') format('woff'),
+         url('ladiaria_icons-webfont.ttf') format('truetype'),
+         url('ladiaria_icons-webfont.svg#svgfont_2regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

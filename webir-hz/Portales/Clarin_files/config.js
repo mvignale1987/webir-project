@@ -1,1 +1,0 @@
-window.sas_diffDomain='http://ww619.smartadserver.com';window.sas_pluginDomain='http://ak-ns.sascdn.com/diff/video/current';window.sas_sdkPlayerConfigId=0;

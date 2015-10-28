@@ -41,13 +41,12 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-/*
+
 //Conexión a Mongoose.
-mongoose.connect('mongodb://localhost/base_webIr', function(error){
+mongoose.connect('mongodb://localhost:27017/noticias', function(error){
    if(error){
       throw error;
    }else{
       console.log('Conectado a MongoDB');
    }
 });
-*/

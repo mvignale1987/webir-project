@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title> WebIr </title>
+		
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		
+        <!-- ACA TUVE UN ERROR DE VERSIONES, AL FINAL PUSE UN CDN PARA TENER LAS DOS VERSIONES IGUALES, SINO NO ME ANDABA.-->
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<!--
+		<script type="text/javascript" src="js/angular-route.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular-route.js"></script>
+		-->
+        
+		<!-- Custom styles for this template -->
+		<link href="css/theme.css" rel="stylesheet">
+		<!-- Implementa mi logica de angular para esta pagina. -->
+        <script type="text/javascript" src="js/server.js"></script>
+    </head>
+    <body ng-app="appHz" ng-controller="CtrlPortales">
+		<div class="page-header">
+			<h1>Portales de noticias</h1>
+		</div>
+		<nav class="navbar navbar-inverse">
+			<div class="container">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="#" ng-click="todosSitios()" class="dropdown-toggle" type="button" data-toggle="dropdown">Home</a>
+					</li>
+					<li>
+						<a class="dropdown-toggle" type="button" data-toggle="dropdown">Portales <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+						  <li>
+							<a href="#" ng-click="todosSitios()">Todos los sitios</a>
+						  </li>
+						  <li role="separator" class="divider"></li>
+						  <li ng-repeat="sitio in portales">
+							<a href="#" ng-click="mostrarSitio(sitio.nombre)">{{sitio.nombre}}</a>
+						  </li>
+						</ul>
+					</li>
+				  
+					<li>
+						<a class="dropdown-toggle" type="button" data-toggle="dropdown">Filtros <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+						  <li><a href="#" ng-click="filtrarFechas()">Rango fechas</a></li>
+						  <li role="separator" class="divider"></li>
+						  <li><a href="#" ng-click="filtrarPalabras()">Palabras</a></li>
+						</ul>
+					</li>
+					  
+					<li>
+						<a href="#" class="dropdown-toggle" type="button" data-toggle="dropdown" ng-click="compararNoticias()">Noticias similares</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	
+	<!--  ------------------------------------------------------------------------------------ -->
+		<div class="container">
+			<div ng-repeat="sitio in sitios">
+				<div class="jumbotron">
+					<h1>{{sitio.nombre}}</h1>
+					<p>Estas noticias corresponde al dia actual y poner fecha.</p>
+				</div>
+				<div class="row" ng-repeat="news in sitio.news">
+                    <h2>{{news.titulo}}</h2>
+                    <preview_noticia resumen_noticia='{{news.resumen}}'></preview_noticia>
+                    <!-- 					<p>{{news.resumen}}</p> -->
+					<p><a href="noticias" class="btn btn-default" ng-click="irOrigenNoticia(news.urlnoticia)">Ver noticia &raquo;</a></p>
+				</div>
+				<hr/>
+			</div>
+		</div>
+		<!-- Aquí inyectamos las vistas -->
+		<!-- <div ng-view></div> -->
+	<!--  ------------------------------------------------------------------------------------ -->
+	</body>
+</html>

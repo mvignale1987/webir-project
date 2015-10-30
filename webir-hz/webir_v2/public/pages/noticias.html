@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title> WebIr </title>
+		
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		
+		<!-- ACA TUVE UN ERROR DE VERSIONES, AL FINAL PUSE UN CDN PARA TENER LAS DOS VERSIONES IGUALES, SINO NO ME ANDABA.-->
+		<script type="text/javascript" src="js/angular.min.js"></script>
+				
+		<!-- Custom styles for this template -->
+		<link href="css/theme.css" rel="stylesheet">
+		<!-- Implementa mi logica de angular para esta pagina. -->
+        <script type="text/javascript" src="js/server.js"></script>
+    </head>
+    <body ng-app="appHz">
+		<div class="page-header">
+			<h1>Portales de noticias</h1>
+		</div>
+		<nav class="navbar navbar-inverse" ng-controller="CtrlPortales">
+			<div class="container">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="/" ng-click="todosSitios()" class="dropdown-toggle" type="button">Home</a>
+					</li>
+					
+					<li>
+						<a class="dropdown-toggle" type="button" data-toggle="dropdown">Portales <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+						  <li>
+							<a href="/" ng-click="todosSitios()">Todos los sitios</a>
+						  </li>
+						  <li role="separator" class="divider"></li>
+						  <li ng-repeat="sitio in portales">
+							<a href="/" ng-click="mostrarSitio(sitio.nombre)">{{sitio.nombre}}</a>
+						  </li>
+						</ul>
+					</li>
+				  
+					<li>
+						<a class="dropdown-toggle" type="button" data-toggle="dropdown">Filtros <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="/" ng-click="filtrarFechas()">Rango fechas</a>
+							</li>
+							<li role="separator" class="divider"></li>
+							<li>
+								<a href="/" ng-click="filtrarPalabras()">Palabras</a>
+							</li>
+						</ul>
+					</li>
+					  
+					<li>
+						<a href="/" class="dropdown-toggle" type="button" ng-click="compararNoticias()">Noticias similares</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	
+	<!--  ------------------------------------------------------------------------------------ -->
+	<div class="container" ng-controller="CtrlNoticias">
+        <iframe width="100%" height="950" ng-src="{{noticiaUrl}}" frameborder="1" allowfullscreen>
+            Error, porque no deberia verse este msj.
+        </iframe>
+	</div>
+	<!--  ------------------------------------------------------------------------------------ -->
+	</body>
+</html>
+

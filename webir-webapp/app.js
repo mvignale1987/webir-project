@@ -33,15 +33,7 @@ if ('development' == app.get('env')) {
   app.use(errorHandler());
 }
 
-app.get('/', function(req, res){
-	res.sendfile('./public/index.html');
-});
-
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
-
-
+require('./express/routes.js')(app);
 //Conexión a Mongoose.
 mongoose.connect('mongodb://localhost:27017/noticias', function(error){
    if(error){
@@ -49,4 +41,8 @@ mongoose.connect('mongodb://localhost:27017/noticias', function(error){
    }else{
       console.log('Conectado a MongoDB');
    }
+});
+
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
 });

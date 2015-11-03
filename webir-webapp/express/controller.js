@@ -1,6 +1,6 @@
 var Noticia = require('./models/noticia');
 
-// Obtiene todos los objetos Persona de la base de datos
+// Obtiene todos los objetos Noticia de la base de datos
 exports.getNoticias = function (req, res){
     var queryParams = {};
     if (req.query.sitio)

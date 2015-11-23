@@ -1,0 +1,13 @@
+<center>
+	<form name="formFiltrosFechas">
+		<center><h3>Filtro por fechas</h3></center>
+	    <label for="fechaDesdeInput">Fecha desde:</label>
+	    <input type="date" ng-model="filtro.fechaDesde" placeholder="yyyy-MM-dd" min="2010-01-01" required />
+		<br/>
+		<label for="fechaHastaInput">Fecha hasta:</label>
+	    <input type="date" ng-model="filtro.fechaHasta" placeholder="yyyy-MM-dd" min="2010-01-01" required />
+		<br/>
+		<button class="btn btn-default" ng-click="filtrarFechas()">Consultar</button>
+	</form>
+	<br/>
+</center>

@@ -33,7 +33,9 @@ if ('development' == app.get('env')) {
   app.use(errorHandler());
 }
 
-require('./express/routes.js')(app);
+//Invoco al modulo que indica cual sera el archivo index de la app.
+require('./public/express/routeador.js')(app);
+
 //Conexión a Mongoose.
 mongoose.connect('mongodb://localhost:27017/noticias', function(error){
    if(error){
@@ -44,5 +46,5 @@ mongoose.connect('mongodb://localhost:27017/noticias', function(error){
 });
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+  console.log('Se creo el server express en el puerto: ' + app.get('port'));
 });

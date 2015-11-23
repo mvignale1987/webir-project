@@ -16,3 +16,18 @@ body {
 .theme-showcase .navbar .container {
   width: auto;
 }
+
+#articulos {
+		-webkit-column-count: 2;
+		-webkit-column-gap: 15px;
+}
+article, .tituloArticulo {
+		border-radius: 5px;
+		background-color: rgba(153,204,0,.5);
+}
+.tituloArticulo {
+	margin-bottom: 20px;
+}
+footer, header {
+	text-align:center;
+}

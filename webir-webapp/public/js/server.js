@@ -4,400 +4,170 @@
 * Fecha = 27-10-15
 */
 
-var aplicacion = angular.module('appHz', [] );/*["ngRoute"]*/
+var aplicacion = angular.module('appHz', [] );               /*["ngRoute"]*/
+//Para que se ejecute cuando arranca la app.
 
-/*
-// Configuración de las rutas para el sitio.
-aplicacion.config(['$routeProvider',function($routeProvider) {
-
- /*
-  $routeProvider.when('/', {
-    templateUrl: "pages/home.html", //Las rutas son relativas al index.
-    controller: "CtrlPortales"
-  });
- 
-  $routeProvider.when('/sitio', {
-    templateUrl: "pages/home.html", //Las rutas son relativas al index.
-    controller: "CtrlSitio"
-  });
-  /
-  
-  $routeProvider.when('/noticias', {
-    templateUrl: "pages/noticias.html",
-    controller: "CtrlNoticias"
-  });
-   
-  $routeProvider.otherwise({
-        redirectTo: '/'
-  });
-
-}]);
-*/
-
-
-
-/* ////////////////////////////////////////////Singleton UrlVerNoticia/////////////////////////////////////////////// */
-//Uno de los 3 tipos de servicios
-//aplicacion.value('UrlVerNoticia', 'http://localhost:3000/');
-
-aplicacion.factory('UrlVerNoticia', function (){
-    return {
-            url:'http://www.elpais.com.uy/informacion/seis-meses-dieron-baja-cuidacoches.html',
-    }
-});
-
-/* ////////////////////////////////////////////Controlador CtrlPortales/////////////////////////////////////////////// */
-
-aplicacion.controller('CtrlPortales', function($scope, UrlVerNoticia) {
-	//Guardo url a la noticia que estoy viendo
-	$scope.urlnoticia = UrlVerNoticia.url;
-	$scope.UrlVerNoticia = UrlVerNoticia;
-        
-	//Variable que se carga de la base con todos los portales y sus noticias
-	$scope.sitios = devolverSitio("Todos");
+//Cuando utilizamos el ['$scope', function($scope){...}] es para tener visivilidad global dentro de las funciones,
+//sino los cambios de variables globales dentro de las funciones no tienen efecto fuera de ella o dentro de otra funcion.
+aplicacion.controller("mainCtrl", ['$scope', '$sce', '$http', function($scope, $sce, $http) {
+    //Me indica que pagina será cargada para aplicar los filtros.
+	$scope.contentFiltros = 'pages/';
+	$scope.filtro=
+	{
+		fechaDesde : new Date(),
+		fechaHasta : new Date(),
+		palabra:'',
+	}
 	
+	//Me indica que pagina será cargada para mostrar como cuerpo.
+	$scope.contentUrl = 'pages/home.html';
+	//Indica la Url que se visualizará de la noticia.
+	$scope.noticiaUrl = $sce.trustAsResourceUrl('http://www.elpais.com.uy/informacion/no-le-podremos-vender-carne.html');
+	
+	//
+    $scope.cambiarCuerpoPagina = function (step,url) {
+		//Indico que pagina será la que se mostrara en el cuerpo de la pagina.
+        $scope.contentUrl = 'pages/' + step + '.html';
+		//Indico que confio en esta URL.
+		$scope.noticiaUrl = $sce.trustAsResourceUrl(url);
+        //alert($scope.contentUrl);
+        //alert($scope.noticiaUrl);
+    };
+	
+	//Funcion que devuelve que pagina mostrar entre home.html y noticias.html.
+	$scope.mostrarfiltrosPagina = function () {
+        return $scope.contentFiltros;
+    };
+	
+    //Funcion que devuelve que pagina mostrar entre home.html y noticias.html.
+	$scope.mostrarCuerpoPagina = function () {
+		//alert(this.contentUrl);
+        return $scope.contentUrl;
+    };
+	
+	//Funcion que devuelve que pagina mostrar entre home.html y noticias.html.
+	$scope.consultarFiltros = function (filtro) {
+		//alert('filtro');
+		if(filtro == 'fechas'){
+			$scope.contentFiltros = 'pages/filtroFechas.html';
+		}
+		if(filtro == 'palabra'){
+			$scope.contentFiltros = 'pages/filtroPalabras.html';
+		}
+    };
+	
+	//Invoco a la funcion que me trae los sitios por el rango de fechas.
+	$scope.filtrarFechas = function () {
+		alert($scope.filtro.fechaDesde);
+		alert($scope.filtro.fechaHasta);
+		//Hago la consulta a la BD a traves de la URL que le asignamos a la funcion de mostrar el sitio por el rango de fechas.
+		$http({
+            method: 'GET',
+			url: '/consultarSitio_Fechas',
+			params: {
+				fechaDesde: $scope.filtro.fechaDesde,
+				fechaHasta: $scope.filtro.fechaHasta,
+			}
+        }).
+        success(function(data) {
+            if(typeof(data) == 'object'){
+                $scope.sitios = data;
+            }else{
+                alert('Error, no se recibio un objeto.');
+            }
+        }).
+        error(function() {
+            alert('Error, al intentar recuperar los Sitios de noticias.');
+        });
+    };
+	
+	//Invoco a la funcion que me trae los sitios por una palabra.
+	$scope.filtrarPalabras = function () {
+       alert($scope.filtro.palabra);
+	   
+	   //Invoco a la funcion que de proporciona la BD.
+	   $http({
+            method: 'GET',
+			url: '/consultarSitio_Palabra',
+			params: {
+				palabra: $scope.filtro.palabra,
+			}
+        }).
+        success(function(data) {
+            if(typeof(data) == 'object'){
+                $scope.sitios = data;
+            }else{
+                alert('Error, no se recibio un objeto.');
+            }
+        }).
+        error(function() {
+            alert('Error, al intentar recuperar los Sitios de noticias.');
+        });
+    };
+	
+    //Funcion que obtiene las noticias de todos los sitios.
+	$scope.mostrarTodosSitios = function () {
+        //alert("Todos los sitios");
+		$scope.contentUrl = 'pages/home.html';
+		//Saco el filtro porque estoy consultando otras cosas.
+		$scope.contentFiltros = 'pages/';
+		
+		//Hago la consulta a la BD a traves de la URL que le asignamos a la funcion de mostrar todos los sitios.
+		$http({
+            method: 'GET',
+			url: '/consultar_TodosSitios'
+        }).
+        success(function(data) {
+            if(typeof(data) == 'object'){
+                $scope.sitios = data;
+            }else{
+                alert('Error, no se recibio un objeto.');
+            }
+        }).
+        error(function() {
+            alert('Error, al intentar recuperar los Sitios de noticias.');
+        });
+    };
+    
+	$scope.mostrarSitio = function(nombSitio) {
+		//alert("Mostrar Sitio");
+		
+		//Saco el filtro porque estoy consultando otras cosas.
+		$scope.contentFiltros = 'pages/';
+		//Seteo home.html como pagina de inicio.
+		$scope.contentUrl = 'pages/home.html';
+		
+		//Hago la consulta a la BD a traves de la URL que le asignamos a la funcion de mostrar todos los sitios.
+		$http({
+            method: 'GET',
+			url: '/consultarSitio_Nombre',
+			params: {
+				_nombreSitio: nombSitio
+			}
+        }).
+        success(function(data) {
+            if(typeof(data) == 'object'){
+                $scope.sitios = data;
+            }else{
+                alert('Error, no se recibio un objeto.');
+            }
+        }).
+        error(function() {
+            alert('Error, al intentar recuperar los Sitios de noticias.');
+        });
+		
+    };
+}])
+
+/* ////////////////////////////////////////////Controlador mainController/////////////////////////////////////////////// */
+
+aplicacion.controller("headerCtrl", function($scope) {
+    //alert("headerController");
+   
 	//Momentaneo hasta que se consiga los datos de la base.
 	$scope.portales = [{nombre: 'ElPais'},{nombre: 'ElObservador'},{nombre: 'Subrayado'}];
-	
-	/*
-		Consumir api rest para buscar todos los sitios
-	*/
-	//Funcion que obtiene las noticias de todos los sitios.
-	$scope.todosSitios = function() {
-        //alert("Todos los sitios");
-		
-		$scope.sitios = devolverSitio("Todos");
-    }
-	$scope.mostrarSitio = function(nombSitio) {
-		//index es la posicion de la lista generada.
-        //alert("Sitio nombre=" + nombSitio );
-		
-		$scope.sitios = devolverSitio(nombSitio);
+})
 
-    }	
-	$scope.irOrigenNoticia = function(url) {
-		//index es la posicion de la lista generada.
-        //alert(url);
-        $scope.UrlVerNoticia.url = url;
-        
-		//$scope.urlnoticia = url;
-        //alert($scope.urlnoticia);
-    }
+/* ////////////////////////////////////// Funciones auxiliares ///////////////////////////////////////////////////// */
 
-});
-
-/* ////////////////////////////////////////////Controlador CtrlNoticias/////////////////////////////////////////////// */
-
-/*Me andaba pero si ingresaba a una noticia dejaba de funcionar.
-aplicacion.config(['$sceDelegateProvider', function($sceDelegateProvider) {
-		$sceDelegateProvider.resourceUrlWhitelist(['http://elpais.com.uy/']);
-}]);
-*/
-
-//Controlador para una noticia.
-aplicacion.controller('CtrlNoticias', function($scope, UrlVerNoticia, $sce) {
-	//Guardo url a la noticia que estoy viendo
-	$scope.dataUrl = UrlVerNoticia.url;
-    //alert($scope.dataUrl);
-    $scope.noticiaUrl = $sce.trustAsResourceUrl($scope.dataUrl);
-});
-
-/* //////////////////////////////////////Directiva preview_noticia///////////////////////////////////////////////////// */
-
-/*
-NO ME ANDUVO LA DIRECTIVA PARA SUSITITUIR EL ELEMENTO =(
-
-//Implemento la directiva que mostrará las noticias en el div.
-aplicacion.directive('preview_noticia', function() {
-  return {
-			restrict: 'E',
-			scope: {
-				resumen_noticia: '='
-			},
-			transclude : true,
-			templateUrl : "pages/directiva_noticia.html",
-			link: function ($scope, $element, $attrs) {
-				var template = resumenNoticia;
-				var compiled = angular.element($compile(resumenNoticia));
-				$element = compiled;			
-			}
-	};
-});
-*/
-//Implemento la directiva que mostrará las noticias en el div.
-aplicacion.directive('preview_noticia', function() {
-  return {
-			restrict: 'E',
-			scope: {},
-			templateUrl : "<p></p>",
-            replace:true,
-			link: function ($scope, $element, $attrs) {
-				var resumen = attrs.resumen_noticia;
-				$scope.p=resumen;
-			}
-	}
-});
-
-/*
-//Controlador para una noticia.
-aplicacion.controller('CtrlSitio', function($scope, UrlVerNoticia, CtrlPortales) {
-	//Guardo url a la noticia que estoy viendo
-	$scope.sitios = UrlVerNoticia.sitios;
-	
-	alert("CtrlSitio - ");
-
-});
-*/
-
-/*
-NO ME ANDUVO LA DIRECTIVA PARA SUSITITUIR EL ELEMENTO =(
-
-//Implemento la directiva que mostrará las noticias en el div.
-aplicacion.directive('preview_noticia', function() {
-  return {
-			restrict: 'E',
-			scope: {
-				resumen_noticia: '='
-			},
-			transclude : true,
-			templateUrl : "pages/directiva_noticia.html",
-			link: function ($scope, $element, $attrs) {
-				var template = resumenNoticia;
-				var compiled = angular.element($compile(resumenNoticia));
-				$element = compiled;			
-			}
-	};
-});
-*/
-
-function devolverSitio(sitio) {
-	//alert("devolverSitio=" + sitio);
-	/*
-	Consumir api rest para buscar todos los sitios
-	*/
-	var sitios = [];
-	if(sitio == "Todos")
-	{
-		sitios = [{
-					nombre: 'ElPais',
-					news: [
-						{
-						titulo: "Noticia Pais 1",
-						fecha: "27-10-15",
-						url:'http://axelhzf.com/js-training-doc/angular.html',
-						resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Pais 1</h2> <p>Resumen Pais 1</p></div>',
-						},
-						{
-						titulo: "Noticia Pais 2",
-						fecha: "27-10-15",
-						url:'http://axelhzf.com/js-training-doc/angular.html',
-						resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Pais 2</h2> <p>Resumen Pais 2</p></div>',
-						},
-						{
-						titulo: "Noticia Pais 3",
-						fecha: "27-10-15",
-						url:'http://axelhzf.com/js-training-doc/angular.html',
-						resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Pais 3</h2> <p>Resumen Pais 3</p></div>',
-						},
-						{
-						titulo: "Noticia Pais 4",
-						fecha: "27-10-15",
-						url:'http://axelhzf.com/js-training-doc/angular.html',
-						resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Pais 4</h2> <p>Resumen Pais 4</p></div>',
-						},
-						{
-						titulo: "Noticia Pais 5",
-						fecha: "27-10-15",
-						url:'http://axelhzf.com/js-training-doc/angular.html',
-						resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Pais 5</h2> <p>Resumen Pais 5</p></div>',
-						},
-						{
-						titulo: "Noticia Pais 6",
-						fecha: "27-10-15",
-						url:'http://axelhzf.com/js-training-doc/angular.html',
-						resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Pais 6</h2> <p>Resumen Pais 6</p></div>',
-						}
-					]},
-					{
-						nombre: 'ElObservador',
-						news: [
-							{
-							titulo: "Noticia Observador 1",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Observador 1</h2> <p>Resumen Observador 1</p></div>',
-							},
-							{
-							titulo: "Noticia Observador 2",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Observador 2</h2> <p>Resumen Observador 2</p></div>',
-							},
-							{
-							titulo: "Noticia Observador 3",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Observador 3</h2> <p>Resumen Observador 3</p></div>',
-							},
-							{
-							titulo: "Noticia Observador 4",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Observador 4</h2> <p>Resumen Observador 4</p></div>',
-							},
-							{
-							titulo: "Noticia Observador 5",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Observador 5</h2> <p>Resumen Observador 5</p></div>',
-							},
-							{
-							titulo: "Noticia Observador 6",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Observador 6</h2> <p>Resumen Observador 6</p></div>',
-							},
-							{
-							titulo: "Noticia Observador 7",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Observador 7</h2> <p>Resumen Observador 7</p></div>',
-							}
-						]
-					},
-					{
-						nombre: 'Subrayado',
-						news: [
-							{
-							titulo: "Noticia Subrayado 1",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Subrayado 1</h2> <p>Resumen Subrayado 1</p></div>',
-							},
-							{
-							titulo: "Noticia Subrayado 2",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Subrayado 2</h2> <p>Resumen Subrayado 2</p></div>',
-							}
-						]
-					}
-				];
-	}
-	else if(sitio == 'ElPais')
-		{
-			sitios = [{
-						nombre: 'ElPais',
-						news: [
-							{
-							titulo: "Noticia Pais 1",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Pais 1</h2> <p>Resumen Pais 1</p></div>',
-							},
-							{
-							titulo: "Noticia Pais 2",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Pais 2</h2> <p>Resumen Pais 2</p></div>',
-							},
-							{
-							titulo: "Noticia Pais 3",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Pais 3</h2> <p>Resumen Pais 3</p></div>',
-							},
-							{
-							titulo: "Noticia Pais 4",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Pais 4</h2> <p>Resumen Pais 4</p></div>',
-							},
-							{
-							titulo: "Noticia Pais 5",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Pais 5</h2> <p>Resumen Pais 5</p></div>',
-							},
-							{
-							titulo: "Noticia Pais 6",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Pais 6</h2> <p>Resumen Pais 6</p></div>',
-							}
-						]
-					}];
-		}
-		else if(sitio == 'ElObservador')
-		{
-			sitios = [{
-						nombre: 'ElObservador',
-						news: [
-							{
-							titulo: "Noticia Observador 1",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Observador 1</h2> <p>Resumen Observador 1</p></div>',
-							},
-							{
-							titulo: "Noticia Observador 2",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Observador 2</h2> <p>Resumen Observador 2</p></div>',
-							},
-							{
-							titulo: "Noticia Observador 3",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Observador 3</h2> <p>Resumen Observador 3</p></div>',
-							},
-							{
-							titulo: "Noticia Observador 4",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Observador 4</h2> <p>Resumen Observador 4</p></div>',
-							},
-							{
-							titulo: "Noticia Observador 5",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Observador 5</h2> <p>Resumen Observador 5</p></div>',
-							},
-							{
-							titulo: "Noticia Observador 6",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Observador 6</h2> <p>Resumen Observador 6</p></div>',
-							},
-							{
-							titulo: "Noticia Observador 7",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Observador 7</h2> <p>Resumen Observador 7</p></div>',
-							}
-						]
-					}];
-			
-		}else if(sitio == 'Subrayado')
-		{
-			sitios = [{
-						nombre: 'Subrayado',
-						news: [
-							{
-							titulo: "Noticia Subrayado 1",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Subrayado 1</h2> <p>Resumen Subrayado 1</p></div>',
-							},
-							{
-							titulo: "Noticia Subrayado 2",
-							fecha: "27-10-15",
-							url:'http://axelhzf.com/js-training-doc/angular.html',
-							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Subrayado 2</h2> <p>Resumen Subrayado 2</p></div>',
-							}
-						]
-					}];
-		}
-	return sitios;
-}
 

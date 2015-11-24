@@ -1,5 +1,6 @@
 var request = require("request"),
     cheerio = require("cheerio"),
+    mongoose = require('mongoose');
     procesarLink = require("./procesarLink.js"),
     fs = require('fs'), //Para manejar archivos
     urls = [],urlsNoAgrego = [],
@@ -13,7 +14,7 @@ var primero = true;
 
 function recorrerSitios(){
 	//Recorro para cada uno de los sitios.
-	sitios.forEach(function(url){ 
+	sitios.forEach(function(url){
 	    //Obtengo una pagina .html desde la web.
 	    request(url, function (error, response, body) {
 		if (!error) {
@@ -24,7 +25,7 @@ function recorrerSitios(){
 		        var $text = $link.text();
 		        var $href = $link.attr("href");
 			var $div  = $link.closest('div');
-		
+
 		        for(var i=0; i<arrayUrlsTodos.length; i++)
 			{
 				if(arrayUrlsTodos[i] == $href)
@@ -90,7 +91,7 @@ function recorrerSitios(){
 						link = $href;
 						arrayUrls.push(link);
 						entro = true;
-						procesarLink.procesarLinkTelam(link);
+						// procesarLink.procesarLinkTelam(link);
 						break;
 					}
 					if (!entro){
@@ -98,7 +99,7 @@ function recorrerSitios(){
 					}
 				}
 			 }
-			 existe=false;   
+			 existe=false;
 		     });
 			fs.writeFile('HREF.txt', arrayUrls.join('\n'), function (err) {
 			  if (err) throw err;
@@ -114,7 +115,14 @@ function recorrerSitios(){
 		    console.log("We’ve encountered an error: " + error);
 		}
 	    });
-	}); 
+	});
 }
+//Conexión a Mongoose.
+mongoose.connect('mongodb://localhost:27017/noticias', function(error){
+   if(error){
+      throw error;
+   }else{
+      console.log('Conectado a MongoDB');
+   }
+});
 recorrerSitios();
-   

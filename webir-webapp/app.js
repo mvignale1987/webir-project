@@ -34,7 +34,7 @@ if ('development' == app.get('env')) {
 }
 
 //Invoco al modulo que indica cual sera el archivo index de la app.
-require('./public/express/routeador.js')(app);
+require('./express/routes.js')(app);
 
 //Conexión a Mongoose.
 mongoose.connect('mongodb://localhost:27017/noticias', function(error){

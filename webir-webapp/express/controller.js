@@ -7,16 +7,19 @@ exports.getNoticias = function (req, res){
       queryParams.sitio = req.query.sitio;
     if (req.query.palabra)
       queryParams.$text = { $search: req.query.palabra.replace(/ /g,"\" \"") };
-    queryParams.fecha = {};
+    // queryParams.fecha = {};
     if (req.query.fechaDesde){
+      queryParams.fecha = {};
       var fechaDesde = req.query.fechaDesde.split("-");
-      queryParams.fecha.$gte = new Date(fechaDesde[0], fechaDesde[1], fechaDesde[2]);
+      queryParams.fecha.$gte = new Date(fechaDesde[0], fechaDesde[1] - 1 , fechaDesde[2]);
 
     }if (req.query.fechaHasta) {
+      if (!queryParams.fecha)
+        queryParams.fecha =  {}
       var fechaHasta = req.query.fechaHasta.split("-");
-      queryParams.fecha.$lte = new Date(fechaHasta[0], fechaHasta[1], fechaHasta[2]);
+      queryParams.fecha.$lte = new Date(fechaHasta[0], fechaHasta[1] - 1 , fechaHasta[2]);
     }
-
+    console.log(queryParams);
     Noticia.find(queryParams,
   		function(err, noticia) {
   			if (err) {

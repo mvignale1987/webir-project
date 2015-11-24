@@ -1,10 +1,17 @@
 {
   "name": "webir-crawler",
-  "main": "crawler.js",
+  "main": "scraping_v4.js",
+  "scripts": {
+    "start": "node scraping_v4.js"
+  },
   "dependencies": {
     "async": "^1.4.2",
     "colors": "^1.1.2",
     "phantom": "^0.7.2",
     "phantomjs": "^1.9.18",
-    "simplecrawler": "^0.5.3"    }
+    "cheerio": "*",
+    "request": "*",
+    "simplecrawler": "^0.5.3",
+    "mongoose":"^4.2.0"
+    }
 }

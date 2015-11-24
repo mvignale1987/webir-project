@@ -1,5 +1,14 @@
 var request = require("request"),
     cheerio = require("cheerio");
+    mongoose = require('mongoose');
+
+var Noticia = mongoose.model('Noticia', {
+    	titulo: String,
+    	URL: String,
+    	sitio: String,
+      document: String,
+    	fecha: Date
+    });
 
 function obtenerMes (mes){
 	var ret = 0;
@@ -154,21 +163,21 @@ var procesarLinkElPais = function(link){
 	request(link, function (error, response, body) {
 		console.log(link);
 		if (body!=null){
-			//console.log('llegoooooo1111 '+body1+'\n');
-			//console.log('llegoooooo222 '+response1+'\n');
 			var $1 = cheerio.load(body);
-			//console.log('EMPIEZA-TITULO-EP\n');
-			console.log(quitarTabs($1('.title').children().text()));
-			//console.log('TERMINA-TITULO-EP\n');
-			//console.log('EMPIEZA-DESCRIPCION-EP\n');
-			console.log(quitarTabs($1('.pc').children().first().text()));
-			//console.log('TERMINA-DESCRIPCION-EP\n');
-			//console.log('EMPIEZA-FECHA-EP\n');
-			var tfec = quitarTabs ($1('.published').text());
-			console.log(tfec);
-			var fec = fechaElPais (tfec);
-			console.log('fecha devuelta: ' + fec);
-			//console.log('TERMINA-FECHA-EP\n');
+
+      var noticia = new Noticia({
+          sitio : 'ElPais',
+          titulo : quitarTabs($1('.title').children().text()),
+          URL : link,
+          document : quitarTabs($1('.pc').children().first().text()),
+          fecha: fechaElPais(quitarTabs ($1('.published').text()))
+      });
+      noticia.save(function (err, data) {
+          if (err)
+              console.log(err);
+          else
+              console.log('salve noticia EL Pais');
+      });
 		}else{
 			//console.log('FALLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
 			setTimeout(procesarLinkElPais(link),10000);
@@ -181,23 +190,24 @@ var procesarLinkElObservador = function(link){
 	request(link, function (error, response, body) {
 		console.log(link);
 		if (body!=null){
-			//console.log('llegoooooo1111 '+body+'\n');
-			//console.log('llegoooooo222 '+response+'\n');
+
 			var $1 = cheerio.load(body);
-			//console.log('EMPIEZA-TITULO-EO\n');
-			console.log(quitarTabs($1('.detail-title').text()));
-			//console.log('TERMINA-TITULO-EO\n');
-			//console.log('EMPIEZA-DESCRIPCION-EO\n');
-			console.log(quitarTabs($1('.detail-preview').first().text()));
-			//console.log('TERMINA-DESCRIPCION-EO\n');
-			//console.log('EMPIEZA-FECHA-EO\n');
-			var tfec = quitarTabs ($1('.date-wrapper').text());
-			console.log(tfec);
-			var fec = fechaElObservador (tfec);
-			console.log('fecha devuelta: ' + fec);
-			//console.log('TERMINA-FECHA-EO\n');
+
+      var noticia = new Noticia({
+          sitio : 'Observa',
+          titulo : quitarTabs($1('.detail-title').text()),
+          URL : link,
+          document : quitarTabs($1('.detail-preview').first().text()),
+          fecha: fechaElObservador(quitarTabs ($1('.date-wrapper').text()))
+        });
+
+      noticia.save(function (err, data) {
+          if (err)
+              console.log(err);
+          else
+              console.log('salve noticia Observa');
+      });
 		}else{
-			//console.log('FALLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
 			setTimeout(procesarLinkElObservador(link),10000);
 		}
 		console.log('---------------------------------------------------');
@@ -208,22 +218,23 @@ var procesarLinkRepublica = function(link){
 	request(link, function (error, response, body) {
 		console.log(link);
 		if (body!=null){
-			//console.log('llegoooooo1111 '+body+'\n');
-			//console.log('llegoooooo222 '+response+'\n');
+
 			var $1 = cheerio.load(body);
-			//console.log('EMPIEZA-TITULO-RE\n');
-			console.log(quitarTabs($1('.entry-title').text()));
-			//console.log('TERMINA-TITULO-RE\n');
-			//console.log('EMPIEZA-DESCRIPCION-RE\n');
-			console.log(quitarTabs ($1('.excerpt_single').children().first().text()));
-			//console.log('TERMINA-DESCRIPCION-RE\n');
-			//console.log('EMPIEZA-FECHA-RE\n');
-			var tfec = quitarTabs ($1('.updated').text());
-			console.log(tfec);
-			var fec = fechaRepublica (tfec);
-			console.log('fecha devuelta: ' + fec);
-			//console.log('TERMINA-FECHA-RE\n');
-		}else{
+
+      var noticia = new Noticia({
+          sitio : 'Republica',
+          titulo : quitarTabs($1('.entry-title').text()),
+          URL : link,
+          document : quitarTabs ($1('.excerpt_single').children().first().text()),
+          fecha: fechaRepublica(quitarTabs ($1('.updated').text()))
+        });
+        noticia.save(function (err, data) {
+          if (err)
+              console.log(err);
+          else
+              console.log('salve noticia Republica');
+        });
+      }else{
 			//console.log('FALLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
 			setTimeout(procesarLinkRepublica(link),10000);
 		}
@@ -252,7 +263,7 @@ var procesarLinkTelam = function(link){
 			//console.log('TERMINA-FECHA-TE\n');
 		}else{
 			//console.log('FALLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
-			setTimeout(procesarLinkTelam(link),10000);
+			// setTimeout(procesarLinkTelam(link),10000);
 		}
 		console.log('---------------------------------------------------');
 	});
@@ -262,4 +273,3 @@ module.exports.procesarLinkElPais = procesarLinkElPais;
 module.exports.procesarLinkElObservador = procesarLinkElObservador;
 module.exports.procesarLinkRepublica = procesarLinkRepublica;
 module.exports.procesarLinkTelam = procesarLinkTelam;
-

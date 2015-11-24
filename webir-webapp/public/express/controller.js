@@ -120,7 +120,7 @@ exports.consultarSitio_Nombre = function (req, res){
 		if (req.query.sitio){
 			queryParams.sitio = req.query._nombreSitio;
 		}
-		
+
 		Noticia.find(queryParams, //Paso el parametro previamente cargado en el if anterior.
 			function(err, sitio) { //decia noticia
 				if (err) {
@@ -132,7 +132,7 @@ exports.consultarSitio_Nombre = function (req, res){
 
 	*/
 	var sitios = [];
-	
+
 	if(req.query._nombreSitio == 'ElPais')
 		{
 			sitios = [{
@@ -241,7 +241,7 @@ exports.consultarSitio_Nombre = function (req, res){
 							}
 						]
 					}];
-			
+
 		}else if(req.query._nombreSitio == 'Subrayado')
 		{
 			sitios = [{
@@ -281,7 +281,7 @@ exports.consultarSitio_Fechas = function (req, res){
 		  var fechaHasta = req.query.fechaHasta.split("-");
 		  queryParams.fecha.$lte = new Date(fechaHasta[0], fechaHasta[1], fechaHasta[2]);
 		}
-		
+
 		Noticia.find(queryParams, //Paso el parametro previamente cargado en el if anterior.
 			function(err, sitio) { //decia noticia
 				if (err) {
@@ -299,7 +299,7 @@ exports.consultarSitio_Palabra = function (req, res){
 		var queryParams = {};
 		if (req.query.palabra)
 			queryParams.$text = { $search: req.query.palabra.replace(/ /g,"\" \"") };
-		
+
 		Noticia.find(queryParams, //Paso el parametro previamente cargado en el if anterior.
 			function(err, sitio) { //decia noticia
 				if (err) {
@@ -312,8 +312,8 @@ exports.consultarSitio_Palabra = function (req, res){
 	*/
 }
 
-/*
-Lo de Mauricio.
+
+//Lo de Mauricio.
 
 // Obtiene todos los objetos Noticia de la base de datos
 exports.getNoticias = function (req, res){
@@ -322,17 +322,17 @@ exports.getNoticias = function (req, res){
       queryParams.sitio = req.query.sitio;
     if (req.query.palabra)
       queryParams.$text = { $search: req.query.palabra.replace(/ /g,"\" \"") };
-  
-    queryParams.fecha = {};
+
+    // queryParams.fecha = {};
     if (req.query.fechaDesde){
-      var fechaDesde = req.query.fechaDesde.split("-");
+			queryParams.fecha = {};
+			var fechaDesde = req.query.fechaDesde.split("-");
       queryParams.fecha.$gte = new Date(fechaDesde[0], fechaDesde[1], fechaDesde[2]);
 
     }if (req.query.fechaHasta) {
       var fechaHasta = req.query.fechaHasta.split("-");
       queryParams.fecha.$lte = new Date(fechaHasta[0], fechaHasta[1], fechaHasta[2]);
     }
-
     Noticia.find(queryParams,
   		function(err, noticia) {
   			if (err) {
@@ -342,4 +342,3 @@ exports.getNoticias = function (req, res){
   		}
   	);
 }
-*/

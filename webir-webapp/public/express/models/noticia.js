@@ -1,9 +1,15 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Noticia', {
-	titulo: String,
-	URL: String,
-	sitio: String,
-  document: String,
-	fecha: Date
+	nombre: String,
+	id:String,
+	news: [
+			{
+				titulo:String,
+				fecha: Date,
+				url:String,
+				resumen: String,
+				documento: String,
+			}
+		]
 });

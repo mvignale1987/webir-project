@@ -15,7 +15,7 @@
 
         <script type="text/javascript" src="js/server.js"></script>
     </head>
-    <body ng-app="appHz" ng-controller="mainCtrl" ng-init="mostrarTodosSitios()">
+    <body ng-app="appHz" ng-controller="mainCtrl" ng-init="inicializar()">
         <header class="container">
 			<center>
 				<h1>Portales de noticias</h1>
@@ -24,7 +24,9 @@
         
         <div ng-include="'pages/cabezera.html'" ng-controller="headerCtrl"></div>
 		<!--  ------------------------------------------------------------------------------------ -->
-        <div ng-include="mostrarfiltrosPagina()"></div>
+        <div ng-include="consultarFiltros('fechas')"></div>
+		<!--  ------------------------------------------------------------------------------------ -->
+        <div ng-include="consultarFiltros('palabra')"></div>
         <!--  ------------------------------------------------------------------------------------ -->
         <div ng-include="mostrarCuerpoPagina()"></div>
         <!--  ------------------------------------------------------------------------------------ -->

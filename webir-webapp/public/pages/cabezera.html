@@ -2,13 +2,13 @@
     <div class="container">
         <ul class="nav navbar-nav">
             <li>
-                <a ng-click="mostrarTodosSitios()" class="dropdown-toggle" type="button" data-toggle="dropdown">Home</a>
+                <a ng-click="inicializar()" class="dropdown-toggle" type="button" data-toggle="dropdown">Home</a>
             </li>
             <li>
                 <a class="dropdown-toggle" type="button" data-toggle="dropdown">Portales <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a ng-click="mostrarTodosSitios()">Todos los sitios</a>
+                    <a ng-click="inicializar()">Todos los sitios</a>
                   </li>
                   <li role="separator" class="divider"></li>
                   <li ng-repeat="sitio in portales">
@@ -20,9 +20,9 @@
             <li>
                 <a class="dropdown-toggle" type="button" data-toggle="dropdown">Filtros <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a ng-click="consultarFiltros('fechas')">Rango fechas</a></li>
+                  <li><a ng-click="mostrarFiltro('fechas')">Rango fechas</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a ng-click="consultarFiltros('palabra')">Palabras</a></li>
+                  <li><a ng-click="mostrarFiltro('palabra')">Palabras</a></li>
                 </ul>
             </li>
 

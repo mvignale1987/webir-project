@@ -1,7 +1,79 @@
 var Noticia = require('./models/noticia');
 
+// Obtiene todos los objetos Noticia de la base de datos
+exports.getNoticias = function (req, res){
+    var queryParams = {};
+	//Me fijo si tengo que filtrar por sitio especifico.
+    if (req.query.sitio && req.query.sitio != 'Todos')
+	{
+		queryParams.sitio = req.query.sitio;
+	}
+    
+	//Me fijo si tengo que filtrar por palabra.
+    if (req.query.palabra)
+	{
+		queryParams.$text = { $search: req.query.palabra.replace(/ /g,"\" \"") };
+	}
+    
+	//Me fijo si tengo que filtrar por fechas.
+    queryParams.fecha = {};
+    if (req.query.fechaDesde){
+      var fechaDesde = req.query.fechaDesde.split("-");
+      queryParams.fecha.$gte = new Date(fechaDesde[0], fechaDesde[1], fechaDesde[2]);
+
+    }
+	if (req.query.fechaHasta) {
+      var fechaHasta = req.query.fechaHasta.split("-");
+      queryParams.fecha.$lte = new Date(fechaHasta[0], fechaHasta[1], fechaHasta[2]);
+    }
+	
+	//Realizo la consulta una vez hechos los filtros.
+    Noticia.find(queryParams, //aca paso ya modificado el filtro
+  		function(err, noticia) {
+  			if (err) {
+			  res.send(err)
+			}
+			//res.json(noticia); // devuelve todas las Noticias en JSON
+			
+			sitios = [
+					{
+						nombre: 'Subrayado',
+						id:'3',
+						news: [
+							{
+							titulo: "Noticia Subrayado 1",
+							fecha: "27-10-15",
+							url:'http://axelhzf.com/js-training-doc/angular.html',
+							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Subrayado 1</h2> <p>Resumen Subrayado 1</p></div>',
+							},
+							{
+							titulo: "Noticia Subrayado 2",
+							fecha: "27-10-15",
+							url:'http://axelhzf.com/js-training-doc/angular.html',
+							resumen: '<div class="col-xs-6 col-lg-4"> <h2>Noticia Subrayado 2</h2> <p>Resumen Subrayado 2</p></div>',
+							}
+						]
+					}
+				];
+			
+			res.json(sitios); //Hardcode.
+  		}
+  	);
+}
+
+/*
 exports.consultar_TodosSitios = function (req, res){
 	//Devuelve todas las noticias de todos los sitios.
+	/*
+	Noticia.find({}, //Paso vacio para que traiga todo.
+		function(err, sitio) { //decia noticia
+			if (err) {
+			  res.send(err)
+			}
+			res.json(sitio); // devuelve todas las Noticias en JSON
+		}
+	);
+	* /
 	sitios = [{
 					nombre: 'ElPais',
 					id:'1',
@@ -120,7 +192,7 @@ exports.consultarSitio_Nombre = function (req, res){
 		if (req.query.sitio){
 			queryParams.sitio = req.query._nombreSitio;
 		}
-
+		
 		Noticia.find(queryParams, //Paso el parametro previamente cargado en el if anterior.
 			function(err, sitio) { //decia noticia
 				if (err) {
@@ -130,9 +202,9 @@ exports.consultarSitio_Nombre = function (req, res){
 			}
 		);
 
-	*/
+	* /
 	var sitios = [];
-
+	
 	if(req.query._nombreSitio == 'ElPais')
 		{
 			sitios = [{
@@ -241,7 +313,7 @@ exports.consultarSitio_Nombre = function (req, res){
 							}
 						]
 					}];
-
+			
 		}else if(req.query._nombreSitio == 'Subrayado')
 		{
 			sitios = [{
@@ -281,7 +353,7 @@ exports.consultarSitio_Fechas = function (req, res){
 		  var fechaHasta = req.query.fechaHasta.split("-");
 		  queryParams.fecha.$lte = new Date(fechaHasta[0], fechaHasta[1], fechaHasta[2]);
 		}
-
+		
 		Noticia.find(queryParams, //Paso el parametro previamente cargado en el if anterior.
 			function(err, sitio) { //decia noticia
 				if (err) {
@@ -291,7 +363,7 @@ exports.consultarSitio_Fechas = function (req, res){
 			}
 		);
 
-	*/
+	* /
 }
 
 exports.consultarSitio_Palabra = function (req, res){
@@ -299,7 +371,7 @@ exports.consultarSitio_Palabra = function (req, res){
 		var queryParams = {};
 		if (req.query.palabra)
 			queryParams.$text = { $search: req.query.palabra.replace(/ /g,"\" \"") };
-
+		
 		Noticia.find(queryParams, //Paso el parametro previamente cargado en el if anterior.
 			function(err, sitio) { //decia noticia
 				if (err) {
@@ -309,36 +381,8 @@ exports.consultarSitio_Palabra = function (req, res){
 			}
 		);
 
-	*/
+	* /
 }
 
+*/
 
-//Lo de Mauricio.
-
-// Obtiene todos los objetos Noticia de la base de datos
-exports.getNoticias = function (req, res){
-    var queryParams = {};
-    if (req.query.sitio)
-      queryParams.sitio = req.query.sitio;
-    if (req.query.palabra)
-      queryParams.$text = { $search: req.query.palabra.replace(/ /g,"\" \"") };
-
-    // queryParams.fecha = {};
-    if (req.query.fechaDesde){
-			queryParams.fecha = {};
-			var fechaDesde = req.query.fechaDesde.split("-");
-      queryParams.fecha.$gte = new Date(fechaDesde[0], fechaDesde[1], fechaDesde[2]);
-
-    }if (req.query.fechaHasta) {
-      var fechaHasta = req.query.fechaHasta.split("-");
-      queryParams.fecha.$lte = new Date(fechaHasta[0], fechaHasta[1], fechaHasta[2]);
-    }
-    Noticia.find(queryParams,
-  		function(err, noticia) {
-  			if (err) {
-          res.send(err)
-        }
-  			res.json(noticia); // devuelve todas las Noticias en JSON
-  		}
-  	);
-}

@@ -1,0 +1,15 @@
+<div class="container" ng-controller="CtrlSitio">
+	<div ng-repeat="sitio in sitios">
+		<div class="jumbotron">
+			<h1>{{sitio._id}}</h1>
+			<p>Estas noticias corresponde al dia actual y poner fecha.</p>
+		</div>
+		<!-- Itero entre las noticias, tener en cuenta que este div tambien se repite. -->
+		<div class="row" ng-repeat="news in sitio.news">
+			<h2>{{news.titulo}}</h2>
+			<p>{{news.document}}</p>
+			<p><a href="#noticias" class="btn btn-default" ng-click="irOrigenNoticia(news.URL)">Ver noticia &raquo;</a></p>
+		</div>
+		<hr/><!-- Linea horizontal -->
+	</div>
+</div>

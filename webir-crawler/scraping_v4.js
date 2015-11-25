@@ -91,7 +91,7 @@ function recorrerSitios(){
 						link = $href;
 						arrayUrls.push(link);
 						entro = true;
-						// procesarLink.procesarLinkTelam(link);
+						procesarLink.procesarLinkTelam(link);
 						break;
 					}
 					if (!entro){

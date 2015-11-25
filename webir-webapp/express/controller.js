@@ -5,22 +5,32 @@ exports.getNoticias = function (req, res){
     var queryParams = {};
     if (req.query.sitio)
       queryParams.sitio = req.query.sitio;
-    if (req.query.palabra)
-      queryParams.$text = { $search: req.query.palabra.replace(/ /g,"\" \"") };
-    // queryParams.fecha = {};
+    if (req.query.palabra && req.query.palabra.length > 0)
+      queryParams.$text = { $search: '"'+req.query.palabra.replace(/ /g,"\" \"")+'"' };
     if (req.query.fechaDesde){
       queryParams.fecha = {};
-      var fechaDesde = req.query.fechaDesde.split("-");
-      queryParams.fecha.$gte = new Date(fechaDesde[0], fechaDesde[1] - 1 , fechaDesde[2]);
+      queryParams.fecha.$gte = new Date(req.query.fechaDesde);
 
     }if (req.query.fechaHasta) {
       if (!queryParams.fecha)
         queryParams.fecha =  {}
-      var fechaHasta = req.query.fechaHasta.split("-");
-      queryParams.fecha.$lte = new Date(fechaHasta[0], fechaHasta[1] - 1 , fechaHasta[2]);
+      queryParams.fecha.$lte = new Date(req.query.fechaHasta);
     }
-    console.log(queryParams);
-    Noticia.find(queryParams,
+    var queryAggregate = [];
+    if (Object.keys(queryParams).length  > 0)
+      queryAggregate.push({
+        $match : queryParams
+      });
+    queryAggregate.push({
+      $group: {
+        _id : "$sitio",
+        news: {
+          $push:"$$ROOT"
+        }
+      }
+    });
+    console.log(queryAggregate);
+    Noticia.aggregate(queryAggregate,
   		function(err, noticia) {
   			if (err) {
           res.send(err)

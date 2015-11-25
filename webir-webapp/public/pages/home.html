@@ -1,30 +1,30 @@
 <div class="container">
 	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 		<div class="panel panel-default" ng-repeat="sitio in sitios">
-		
-			<div class="panel-heading " role="tab" id="heading{{sitio.id}}">
+
+			<div class="panel-heading " role="tab" id="heading{{sitio._id}}">
 				<h4 class="panel-title">
-					<a role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{sitio.id}}" aria-expanded="false" aria-controls="collapse{{sitio.id}}">
-					{{sitio.nombre}}
+					<a role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{sitio._id}}" aria-expanded="false" aria-controls="collapse{{sitio.id}}">
+					{{sitio._id}}
 					</a>
 				</h4>
 			</div>
-		
-			<div id="collapse{{sitio.id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{sitio.id}}">
+
+			<div id="collapse{{sitio._id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{sitio._id}}">
 			  <div class="panel-body">
 				<article ng-repeat="news in sitio.news">
 					<h3>{{news.titulo}}</h3>
-					<p>{{news.resumen}}</p>
+					<p>{{news.document}}</p>
 
 					<p><a class="btn btn-default"
-							ng-click="cambiarCuerpoPagina('noticias',news.url)">Ver noticia &raquo;
+							ng-click="cambiarCuerpoPagina('noticias',news.URL)">Ver noticia &raquo;
 					   </a>
 					</p>
 					<hr/>
 				</article>
 			  </div>
 			</div>
-			
+
 		</div>
 	</div>
 </div>

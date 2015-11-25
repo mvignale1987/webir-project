@@ -164,7 +164,6 @@ var procesarLinkElPais = function(link){
 		console.log(link);
 		if (body!=null){
 			var $1 = cheerio.load(body);
-
       var noticia = new Noticia({
           sitio : 'ElPais',
           titulo : quitarTabs($1('.title').children().text()),
@@ -172,11 +171,17 @@ var procesarLinkElPais = function(link){
           document : quitarTabs($1('.pc').children().first().text()),
           fecha: fechaElPais(quitarTabs ($1('.published').text()))
       });
-      noticia.save(function (err, data) {
-          if (err)
-              console.log(err);
-          else
-              console.log('salve noticia EL Pais');
+      Noticia.count({ URL:link }, function(err, c) {
+           if (c == 0) {
+             noticia.save(function (err, data) {
+                if (err)
+                    console.log(err);
+                else
+                    console.log('salve noticia EL Pais');
+             });
+           } else {
+             console.log("Ya fue crawleada");
+           }
       });
 		}else{
 			//console.log('FALLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
@@ -201,12 +206,18 @@ var procesarLinkElObservador = function(link){
           fecha: fechaElObservador(quitarTabs ($1('.date-wrapper').text()))
         });
 
-      noticia.save(function (err, data) {
-          if (err)
-              console.log(err);
-          else
-              console.log('salve noticia Observa');
-      });
+        Noticia.count({ URL:link }, function(err, c) {
+             if (c == 0) {
+               noticia.save(function (err, data) {
+                   if (err)
+                       console.log(err);
+                   else
+                       console.log('salve noticia Observa');
+               });
+             } else {
+               console.log("Ya fue crawleada");
+             }
+        });
 		}else{
 			setTimeout(procesarLinkElObservador(link),10000);
 		}
@@ -228,14 +239,19 @@ var procesarLinkRepublica = function(link){
           document : quitarTabs ($1('.excerpt_single').children().first().text()),
           fecha: fechaRepublica(quitarTabs ($1('.updated').text()))
         });
-        noticia.save(function (err, data) {
-          if (err)
-              console.log(err);
-          else
-              console.log('salve noticia Republica');
+        Noticia.count({ URL:link }, function(err, c) {
+             if (c == 0) {
+               noticia.save(function (err, data) {
+                  if (err)
+                      console.log(err);
+                  else
+                      console.log('salve noticia La Republica');
+               });
+             } else {
+               console.log("Ya fue crawleada");
+             }
         });
       }else{
-			//console.log('FALLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
 			setTimeout(procesarLinkRepublica(link),10000);
 		}
 		console.log('---------------------------------------------------');
@@ -243,30 +259,51 @@ var procesarLinkRepublica = function(link){
 }
 
 var procesarLinkTelam = function(link){
-	request(link, function (error, response, body) {
-		console.log(link);
-		if (body!=null){
-			//console.log('llegoooooo1111 '+body+'\n');
-			//console.log('llegoooooo222 '+response+'\n');
-			var $1 = cheerio.load(body);
-			//console.log('EMPIEZA-TITULO-TE\n');
-			console.log(quitarTabs($1('.title').text()));
-			//console.log('TERMINA-TITULO-TE\n');
-			//console.log('EMPIEZA-DESCRIPCION-TE\n');
-			console.log(quitarTabs ($1('.copete').text()));
-			//console.log('TERMINA-DESCRIPCION-TE\n');
-			//console.log('EMPIEZA-FECHA-TE\n');
-			var tfec = quitarTabs ($1('.date').first().text());
-			console.log(tfec);
-			var fec = fechaTelam (tfec);
-			console.log('fecha devuelta: ' + fec);
-			//console.log('TERMINA-FECHA-TE\n');
-		}else{
-			//console.log('FALLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
-			// setTimeout(procesarLinkTelam(link),10000);
-		}
-		console.log('---------------------------------------------------');
-	});
+    request(link, function (error, response, body) {
+        console.log(link);
+        if (body!=null){
+            var $1 = cheerio.load(body);
+            var titulores = '';
+            $1("title").each(function(){
+                var $link = $1(this);
+                    var $text = $link.text();
+                var titulo = $text.split("-");
+                var cantidad = 2;
+                if (quitarTabs(titulo[titulo.length-1])=='Deportes Télam'){
+                    cantidad = 1;
+                }
+                for(var i = 0; i <= (titulo.length - cantidad - 1); i++){
+                    if (i>0){
+                        titulores += '-';
+                    }
+                    titulores += titulo[i];
+                }
+            });
+            var noticia = new Noticia({
+                sitio : 'Telam',
+                titulo : quitarTabs(titulores),
+                URL : link,
+                document : quitarTabs ($1('.copete').text()),
+                fecha: fechaTelam(quitarTabs ($1('.date').first().text()))
+            });
+            Noticia.count({ URL:link }, function(err, c) {
+                 if (c == 0) {
+                   noticia.save(function (err, data) {
+                      if (err)
+                          console.log(err);
+                      else
+                          console.log('salve noticia Telam');
+                   });
+                 } else {
+                   console.log("Ya fue crawleada");
+                 }
+            });
+        
+        }else{
+             setTimeout(procesarLinkTelam(link),10000);
+        }
+        console.log('---------------------------------------------------');
+    });
 }
 
 module.exports.procesarLinkElPais = procesarLinkElPais;

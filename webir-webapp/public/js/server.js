@@ -178,6 +178,16 @@ aplicacion.controller("mainCtrl", ['$scope', '$sce', '$http', function($scope, $
 // 	$scope.portales = [{nombre: 'ElPais'},{nombre: 'ElObservador'},{nombre: 'Subrayado'}];
 // })
 
+/*Mauricio
+
+aplicacion.controller("headerCtrl", function($scope) {
+    //alert("headerController");
+
+	//Momentaneo hasta que se consiga los datos de la base.
+	$scope.portales = [{_id: 'ElPais'},{_id: 'Observa'},{_id: 'Republica'}, {_id: "Telam"}];
+})
+*/
+
 /* ////////////////////////////////////// Funciones auxiliares ///////////////////////////////////////////////////// */
 /*
 	//Invoco a la funcion que me trae los sitios por el rango de fechas.
@@ -286,11 +296,6 @@ aplicacion.controller("mainCtrl", ['$scope', '$sce', '$http', function($scope, $
     };
 	*/
 
-aplicacion.controller("headerCtrl", function($scope) {
-    //alert("headerController");
 
-	//Momentaneo hasta que se consiga los datos de la base.
-	$scope.portales = [{_id: 'ElPais'},{_id: 'Observa'},{_id: 'Republica'}, {_id: "Telam"}];
-})
 
 /* ////////////////////////////////////// Funciones auxiliares ///////////////////////////////////////////////////// */

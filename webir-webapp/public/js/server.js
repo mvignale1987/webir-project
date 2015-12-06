@@ -40,15 +40,9 @@ aplicacion.controller("mainCtrl", ['$scope', '$sce', '$http', function($scope, $
         //alert("Todos los sitios");
 		$scope.contentUrl = 'pages/home.html';
 
-		//Reseteo todos los campos
-		$scope.cantNoticias = 0;
-		$scope.filtro.sitio = null;
-		$scope.filtro.fechaDesde=null;
-		$scope.filtro.fechaHasta=null;
-		$scope.filtro.palabra=null;
-		
-		$scope.contentFiltro.palabra ='';
-		$scope.contentFiltro.fecha = '';
+		//Limpio los campos previo a realizar la consulta a la BD.
+		limpiarCampos();
+
 		//Invoco a la funcion que se comunica con la DB.
 		aplicarConsulta();
     };
@@ -72,11 +66,10 @@ aplicacion.controller("mainCtrl", ['$scope', '$sce', '$http', function($scope, $
 
 	//Funcion que permite obtener las noticias de un sitio en particular.
 	$scope.mostrarSitio = function(nombSitio) {
-		//alert("Mostrar Sitio");
-		
 		//Saco el filtro porque estoy consultando otras cosas.
-		$scope.contentFiltro.palabra ='';
-		$scope.contentFiltro.fecha = '';
+		//Limpio los campos previo a realizar la consulta a la BD.
+		limpiarCampos();
+		
 		//Seteo home.html como pagina de inicio.
 		$scope.contentUrl = 'pages/home.html';
 
@@ -102,6 +95,9 @@ aplicacion.controller("mainCtrl", ['$scope', '$sce', '$http', function($scope, $
 	$scope.mostrarFiltro = function (filtro) {
         //alert('filtro');
 		if(filtro == 'fechas'){
+			//Para que se inicialice con las fechas actuales.
+			$scope.filtro.fechaDesde=new Date();
+			$scope.filtro.fechaHasta=new Date();
 			$scope.contentFiltro.fecha = 'pages/filtroFechas.html';
 		}
 		if(filtro == 'palabra'){
@@ -166,7 +162,20 @@ aplicacion.controller("mainCtrl", ['$scope', '$sce', '$http', function($scope, $
 	{
 		//alert(sitio.news.length);
 		return sitio.news.length;
-	};						
+	};
+	function limpiarCampos()
+	{
+		//Reseteo todos los campos
+		$scope.cantNoticias = 0;
+		$scope.filtro.sitio = null;
+		$scope.filtro.fechaDesde=null;
+		$scope.filtro.fechaHasta=null;
+		$scope.filtro.palabra=null;
+		
+		$scope.contentFiltro.palabra ='';
+		$scope.contentFiltro.fecha = '';		
+	}
+	
 }])
 
 /* ////////////////////////////////////// Funciones auxiliares ///////////////////////////////////////////////////// */

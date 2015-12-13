@@ -258,6 +258,10 @@ var procesarLinkRepublica = function(link){
 	});
 }
 
+function quitarCaracterExtranio (texto){
+	return texto.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚüÜñÑ\.\-\!\@\#\$\^\&\%\*\(\)\+\=\-\[\]\/\{\}\|\:\<\>\?\,\.\" ]+/g ,'"');
+}
+
 var procesarLinkTelam = function(link){
     request(link, function (error, response, body) {
         console.log(link);
@@ -281,7 +285,7 @@ var procesarLinkTelam = function(link){
             });
             var noticia = new Noticia({
                 sitio : 'Telam',
-                titulo : quitarTabs(titulores),
+                titulo : quitarCaracterExtranio(quitarTabs(titulores)),
                 URL : link,
                 document : quitarTabs ($1('.copete').text()),
                 fecha: fechaTelam(quitarTabs ($1('.date').first().text()))
